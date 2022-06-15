@@ -1,6 +1,7 @@
 import "./App.css";
 import ReactDOMServer from "react-dom/server";
 import jsPDF from "jspdf";
+import ProformaInvoice from "./Components/ProformaInvoice";
 const doc = new jsPDF();
 const Foo = <b>foo</b>;
 
@@ -14,9 +15,13 @@ function App() {
   };
 
   return (
-    <div>
-      <button onClick={save}>save</button>
-    </div>
+    <>
+      <ProformaInvoice />
+
+      <div>
+        <button onClick={save}>save</button>
+      </div>
+    </>
   );
 }
 
