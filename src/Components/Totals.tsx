@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Typography, Container, TextField, Box, Button } from "@mui/material";
 
 type objectType = {
@@ -7,8 +7,8 @@ type objectType = {
 };
 
 const Totals = () => {
-  const [totalAmount, setTotalAmount] = useState<string | null>(null);
-  const [payUntilDate, setPayUntilDate] = useState<string | null>(null);
+  const totalAmount = useRef<HTMLInputElement>(null);
+  const payUntilDate = useRef<HTMLInputElement>(null);
 
   const [totalAndPayDate, setTotalAndPayDate] = useState<objectType | {}>({});
 
@@ -16,8 +16,8 @@ const Totals = () => {
     e.preventDefault();
     if (totalAmount && payUntilDate != null) {
       setTotalAndPayDate({
-        totalAmount: totalAmount,
-        payUntilDate: payUntilDate,
+        totalAmount: totalAmount.current?.value,
+        payUntilDate: payUntilDate.current?.value,
       });
     }
   };
@@ -51,7 +51,7 @@ const Totals = () => {
             label="Suma žodžiais"
             sx={{ marginLeft: "2rem" }}
             type="text"
-            onChange={(e) => setTotalAmount(e.target.value)}
+            inputRef={totalAmount}
           ></TextField>
         </Box>
         <Box style={{ display: "flex", paddingRight: "3rem" }}>
@@ -63,7 +63,7 @@ const Totals = () => {
             size="small"
             type="date"
             sx={{ marginLeft: "2rem" }}
-            onChange={(e) => setPayUntilDate(e.target.value)}
+            inputRef={payUntilDate}
           ></TextField>
         </Box>
         <Button variant="text" type="submit">

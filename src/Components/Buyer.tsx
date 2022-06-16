@@ -1,26 +1,33 @@
+import { useState, useRef } from "react";
 import { Typography, Box, TextField, Container, Button } from "@mui/material";
-import { useState } from "react";
+
+// if needed to map fields later
+// const dataFields = [
+//   { id: 1, label: "UAB Įmonė", ref: "buyerCompanyName", type: "text" },
+//   { id: 2, label: "Įmonės adresas", ref: "buyerCompanyAddress", type: "text" },
+//   { id: 3, label: "Įmonės kodas", ref: "buyerCode", type: "number" },
+// ];
 
 type buyer = {
   company: string;
   adress: string;
-  code: string;
+  code: number;
 };
 
 const Buyer = () => {
-  const [buyerCompanyName, setBuyerCompanyName] = useState<string>("");
-  const [buyerCompanyAddress, setBuyerCompanyAddress] = useState<string>("");
-  const [buyerCode, setBuyerCode] = useState<string>("");
+  const buyerCompanyName = useRef<HTMLInputElement>(null);
+  const buyerCompanyAddress = useRef<HTMLInputElement>(null);
+  const buyerCode = useRef<HTMLInputElement>(null);
 
-  const [buyer, setBuyer] = useState<buyer | null>(null);
+  const [buyer, setBuyer] = useState<buyer | {}>({});
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setBuyer({
-      company: buyerCompanyName,
-      adress: buyerCompanyAddress,
-      code: buyerCode,
+      company: buyerCompanyName.current?.value,
+      adress: buyerCompanyAddress.current?.value,
+      code: buyerCode.current?.value,
     });
   };
 
@@ -35,17 +42,18 @@ const Buyer = () => {
           <TextField
             variant="outlined"
             label="UAB Įmonė"
-            onChange={(e) => setBuyerCompanyName(e.target.value)}
+            inputRef={buyerCompanyName}
           ></TextField>
           <TextField
             variant="outlined"
             label="Įmonės adresas"
-            onChange={(e) => setBuyerCompanyAddress(e.target.value)}
+            inputRef={buyerCompanyAddress}
           ></TextField>
           <TextField
             variant="outlined"
             label="Įmonės kodas"
-            onChange={(e) => setBuyerCode(e.target.value)}
+            type="number"
+            inputRef={buyerCode}
           ></TextField>
           <Button variant="text" type="submit">
             Įvesti
