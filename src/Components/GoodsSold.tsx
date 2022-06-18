@@ -39,22 +39,14 @@ const GoodsSold = () => {
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // if check to get all inputs before setGoods
-    if (
-      soldGoodsName.current?.value &&
-      soldGoodsUnit.current?.value &&
-      soldGoodsQuantity.current?.value &&
-      soldGoodsPrice.current?.value &&
-      soldGoodsTotalPrice.current?.value
-    ) {
-      setGoods({
-        goodsName: soldGoodsName.current?.value,
-        unit: soldGoodsUnit.current?.value,
-        quantity: +soldGoodsQuantity.current?.value,
-        price: +soldGoodsPrice.current?.value,
-        totalPrice: +soldGoodsTotalPrice.current?.value,
-      });
-    }
+    // for now I am sure it will have value so ! at the end
+    setGoods({
+      goodsName: soldGoodsName.current?.value!,
+      unit: soldGoodsUnit.current?.value!,
+      quantity: +soldGoodsQuantity.current?.value!,
+      price: +soldGoodsPrice.current?.value!,
+      totalPrice: +soldGoodsTotalPrice.current?.value!,
+    });
   };
 
   return (

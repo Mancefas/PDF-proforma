@@ -39,7 +39,6 @@ const Seller = () => {
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // if check to get all inputs before setSeller
     if (
       sellerCompany.current?.value &&
       sellerAddress.current?.value &&
