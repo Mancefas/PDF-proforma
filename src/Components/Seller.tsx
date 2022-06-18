@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Typography, TextField, Container, Button } from "@mui/material";
 
 // for DRY later
@@ -26,49 +26,36 @@ type sellerType = {
 };
 
 const Seller = () => {
-  const [sellerCompany, setSellerCompany] = useState<string>("");
-  const [sellerAddress, setSellerAddress] = useState<string>("");
-  const [sellerCompanyCode, setSellerCompanyCode] = useState<number | null>(
-    null
-  );
-  const [sellerBankAccNr, setSellerBankAccNr] = useState<string>("");
-  const [sellerBankCode, setSellerBankCode] = useState<string>("");
-  const [sellerBankName, setSellerBankName] = useState<string>("");
+  const sellerCompany = useRef<HTMLInputElement>(null);
+  const sellerAddress = useRef<HTMLInputElement>(null);
+  const sellerCompanyCode = useRef<HTMLInputElement>(null);
+  const sellerBankAccNr = useRef<HTMLInputElement>(null);
+  const sellerBankSwiftCode = useRef<HTMLInputElement>(null);
+  const sellerBankName = useRef<HTMLInputElement>(null);
 
   const [seller, setSeller] = useState<sellerType | null>(null);
-
-  const inputHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const name = e.target.name;
-    const value = e.target.value;
-
-    if (name === "sellerCompany") {
-      setSellerCompany(value);
-    } else if (name === "sellerCompanyAddress") {
-      setSellerAddress(value);
-    } else if (name === "sellerCompanyCode") {
-      setSellerCompanyCode(+value);
-    } else if (name === "sellerBankAcc") {
-      setSellerBankAccNr(value);
-    } else if (name === "sellerBankSwiftCode") {
-      setSellerBankCode(value);
-    } else if (name === sellerBankName) {
-      setSellerBankName(value);
-    }
-  };
+  console.log(seller);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setSeller({
-      sellerCompany: sellerCompany,
-      sellerAddress: sellerAddress,
-      sellerCompanyCode: sellerCompanyCode,
-      sellerBankAccNr: sellerBankAccNr,
-      sellerBankCode: sellerBankCode,
-      sellerBankName: sellerBankName,
-    });
+    if (
+      sellerCompany.current?.value &&
+      sellerAddress.current?.value &&
+      sellerCompanyCode.current?.value &&
+      sellerBankAccNr.current?.value &&
+      sellerBankSwiftCode.current?.value &&
+      sellerBankName.current?.value
+    ) {
+      setSeller({
+        sellerCompany: sellerCompany.current?.value,
+        sellerAddress: sellerAddress.current?.value,
+        sellerCompanyCode: +sellerCompanyCode.current?.value,
+        sellerBankAccNr: sellerBankAccNr.current?.value,
+        sellerBankCode: sellerBankSwiftCode.current?.value,
+        sellerBankName: sellerBankName.current?.value,
+      });
+    }
   };
   return (
     <Container maxWidth="xs">
@@ -85,7 +72,21 @@ const Seller = () => {
             label={element.label}
             name={element.name}
             type={element.type}
-            onChange={inputHandler}
+            inputRef={
+              element.name === "sellerCompany"
+                ? sellerCompany
+                : element.name === "sellerCompanyAddress"
+                ? sellerAddress
+                : element.name === "sellerCompanyCode"
+                ? sellerCompanyCode
+                : element.name === "sellerBankAcc"
+                ? sellerBankAccNr
+                : element.name === "sellerBankSwiftCode"
+                ? sellerBankSwiftCode
+                : element.name === "sellerBankName"
+                ? sellerBankName
+                : null
+            }
           ></TextField>
         ))}
         <Button variant="text" type="submit">

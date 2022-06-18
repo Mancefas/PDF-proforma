@@ -1,5 +1,5 @@
 import { Typography, Box, TextField, Button } from "@mui/material";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const dataFields = [
   {
@@ -28,41 +28,24 @@ type goodsType = {
 };
 
 const GoodsSold = () => {
-  const [goodsName, setGoodsName] = useState<string>("");
-  const [unit, setUnit] = useState<string>("");
-  const [quantity, setQuantity] = useState<number | null>(null);
-  const [price, setPrice] = useState<number | null>(null);
-  const [totalPrice, setTotalPrice] = useState<number | null>(null);
+  const soldGoodsName = useRef<HTMLInputElement>(null);
+  const soldGoodsUnit = useRef<HTMLInputElement>(null);
+  const soldGoodsQuantity = useRef<HTMLInputElement>(null);
+  const soldGoodsPrice = useRef<HTMLInputElement>(null);
+  const soldGoodsTotalPrice = useRef<HTMLInputElement>(null);
 
   const [goods, setGoods] = useState<goodsType | undefined>(undefined);
-
-  const goodsHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    if (name === "goodsName") {
-      setGoodsName(value);
-    } else if (name === "unit") {
-      setUnit(value);
-    } else if (name === "quantity") {
-      setQuantity(+value);
-    } else if (name === "price") {
-      setPrice(+value);
-    } else if (name === "totalPrice") {
-      setTotalPrice(+value);
-    }
-  };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // for now I am sure it will have value so ! at the end
     setGoods({
-      goodsName: goodsName,
-      unit: unit,
-      quantity: quantity,
-      price: price,
-      totalPrice: totalPrice,
+      goodsName: soldGoodsName.current?.value!,
+      unit: soldGoodsUnit.current?.value!,
+      quantity: +soldGoodsQuantity.current?.value!,
+      price: +soldGoodsPrice.current?.value!,
+      totalPrice: +soldGoodsTotalPrice.current?.value!,
     });
   };
 
@@ -83,7 +66,19 @@ const GoodsSold = () => {
             variant="outlined"
             name={element.name}
             label={element.text}
-            onChange={goodsHandler}
+            inputRef={
+              element.name === "goodsName"
+                ? soldGoodsName
+                : element.name === "unit"
+                ? soldGoodsUnit
+                : element.name === "quantity"
+                ? soldGoodsQuantity
+                : element.name === "price"
+                ? soldGoodsPrice
+                : element.name === "totalPrice"
+                ? soldGoodsTotalPrice
+                : null
+            }
             type={element.type}
           ></TextField>
         </Box>
