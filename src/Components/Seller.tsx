@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { Typography, TextField, Container, Button } from "@mui/material";
 
 // for DRY later
@@ -16,25 +16,13 @@ const dataFields = [
   { id: "6", label: "Bankas", name: "sellerBankName", type: "text" },
 ];
 
-type sellerType = {
-  sellerCompany: string;
-  sellerAddress: string;
-  sellerCompanyCode: number | null;
-  sellerBankAccNr: string;
-  sellerBankCode: string;
-  sellerBankName: string;
-};
-
-const Seller = () => {
+const Seller = ({ setSeller = () => {} }: any) => {
   const sellerCompany = useRef<HTMLInputElement>(null);
   const sellerAddress = useRef<HTMLInputElement>(null);
   const sellerCompanyCode = useRef<HTMLInputElement>(null);
   const sellerBankAccNr = useRef<HTMLInputElement>(null);
   const sellerBankSwiftCode = useRef<HTMLInputElement>(null);
   const sellerBankName = useRef<HTMLInputElement>(null);
-
-  const [seller, setSeller] = useState<sellerType | null>(null);
-  console.log(seller);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

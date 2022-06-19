@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { Typography, Box, TextField, Container, Button } from "@mui/material";
 
 // if needed to map fields later
@@ -8,18 +8,10 @@ import { Typography, Box, TextField, Container, Button } from "@mui/material";
 //   { id: 3, label: "Įmonės kodas", ref: "buyerCode", type: "number" },
 // ];
 
-type buyer = {
-  company: string;
-  adress: string;
-  code: number;
-};
-
-const Buyer = () => {
+const Buyer = ({ setBuyer = () => {} }: any) => {
   const buyerCompanyName = useRef<HTMLInputElement>(null);
   const buyerCompanyAddress = useRef<HTMLInputElement>(null);
   const buyerCode = useRef<HTMLInputElement>(null);
-
-  const [buyer, setBuyer] = useState<buyer | {}>({});
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
