@@ -1,16 +1,9 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { Typography, Container, TextField, Box, Button } from "@mui/material";
 
-type objectType = {
-  totalAmount: string;
-  payUntilDate: string;
-};
-
-const Totals = () => {
+const Totals = ({ setTotalAndPayDate = () => {} }: any) => {
   const totalAmount = useRef<HTMLInputElement>(null);
   const payUntilDate = useRef<HTMLInputElement>(null);
-
-  const [totalAndPayDate, setTotalAndPayDate] = useState<objectType | {}>({});
 
   const sumbitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

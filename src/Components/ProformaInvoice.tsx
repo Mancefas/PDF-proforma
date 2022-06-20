@@ -6,6 +6,8 @@ import ProformaSign from "./ProformaSign";
 import Seller from "./Seller";
 import Totals from "./Totals";
 
+import Document from "./Document";
+
 type sellerType = {
   sellerCompany: string;
   sellerAddress: string;
@@ -20,19 +22,47 @@ type buyerType = {
   code: number;
 };
 
+type objectType = {
+  totalAmount: string;
+  payUntilDate: string;
+};
+
+type goodsType = {
+  goodsName: string;
+  unit: string;
+  quantity: number | null;
+  price: number | null;
+  totalPrice: number | null;
+};
+
 const ProformaInvoice = () => {
   const [formInputs, setFormInputs] = useState({});
+  console.log(formInputs);
+
   const [seller, setSeller] = useState<sellerType | null>(null);
-  const [buyer, setBuyer] = useState<buyerType | {}>({});
+  const [buyer, setBuyer] = useState<buyerType | null>(null);
+  const [goods, setGoods] = useState<goodsType | null>(null);
+  const [totalAndPayDate, setTotalAndPayDate] = useState<objectType | null>(
+    null
+  );
 
   const submitHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    setFormInputs({
-      seller: seller,
-      buyer: buyer,
-    });
+    if (
+      seller != null &&
+      buyer != null &&
+      goods != null &&
+      totalAndPayDate != null
+    ) {
+      setFormInputs({
+        seller: seller,
+        buyer: buyer,
+        goods: goods,
+        totalAndPayDate: totalAndPayDate,
+      });
+    }
   };
 
   return (
@@ -42,8 +72,8 @@ const ProformaInvoice = () => {
         <Seller setSeller={setSeller} />
         <Buyer setBuyer={setBuyer} />
       </Container>
-      <GoodsSold />
-      <Totals />
+      <GoodsSold setGoods={setGoods} />
+      <Totals setTotalAndPayDate={setTotalAndPayDate} />
       <Box
         sx={{
           display: "flex",
@@ -54,6 +84,7 @@ const ProformaInvoice = () => {
         <Button variant="text" onClick={submitHandler}>
           Gauti proforma
         </Button>
+        <Document formInputs={formInputs} />
       </Box>
     </>
   );

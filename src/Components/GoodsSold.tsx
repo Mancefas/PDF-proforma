@@ -1,5 +1,5 @@
-import { Typography, Box, TextField, Button } from "@mui/material";
-import { useRef, useState } from "react";
+import { Typography, Box, TextField, Button, Container } from "@mui/material";
+import { useRef } from "react";
 
 const dataFields = [
   {
@@ -19,22 +19,12 @@ const dataFields = [
   },
 ];
 
-type goodsType = {
-  goodsName: string;
-  unit: string;
-  quantity: number | null;
-  price: number | null;
-  totalPrice: number | null;
-};
-
-const GoodsSold = () => {
+const GoodsSold = ({ setGoods = () => {} }: any) => {
   const soldGoodsName = useRef<HTMLInputElement>(null);
   const soldGoodsUnit = useRef<HTMLInputElement>(null);
   const soldGoodsQuantity = useRef<HTMLInputElement>(null);
   const soldGoodsPrice = useRef<HTMLInputElement>(null);
   const soldGoodsTotalPrice = useRef<HTMLInputElement>(null);
-
-  const [goods, setGoods] = useState<goodsType | undefined>(undefined);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,44 +48,53 @@ const GoodsSold = () => {
   };
 
   return (
-    <form
-      onSubmit={submitHandler}
-      style={{
+    <Container
+      sx={{
         display: "flex",
         marginTop: "2rem",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      {dataFields.map((element) => (
-        <Box key={element.id}>
-          <Typography variant="h6">{element.text}</Typography>
-          <TextField
-            variant="outlined"
-            name={element.name}
-            label={element.text}
-            inputRef={
-              element.name === "goodsName"
-                ? soldGoodsName
-                : element.name === "unit"
-                ? soldGoodsUnit
-                : element.name === "quantity"
-                ? soldGoodsQuantity
-                : element.name === "price"
-                ? soldGoodsPrice
-                : element.name === "totalPrice"
-                ? soldGoodsTotalPrice
-                : null
-            }
-            type={element.type}
-          ></TextField>
-        </Box>
-      ))}
+      <form
+        onSubmit={submitHandler}
+        style={{
+          display: "flex",
+          marginTop: "2rem",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {dataFields.map((element) => (
+          <Box key={element.id}>
+            <Typography variant="h6">{element.text}</Typography>
+            <TextField
+              variant="outlined"
+              name={element.name}
+              label={element.text}
+              inputRef={
+                element.name === "goodsName"
+                  ? soldGoodsName
+                  : element.name === "unit"
+                  ? soldGoodsUnit
+                  : element.name === "quantity"
+                  ? soldGoodsQuantity
+                  : element.name === "price"
+                  ? soldGoodsPrice
+                  : element.name === "totalPrice"
+                  ? soldGoodsTotalPrice
+                  : null
+              }
+              type={element.type}
+            ></TextField>
+          </Box>
+        ))}
 
-      <Button variant="text" type="submit">
-        Įvesti
-      </Button>
-    </form>
+        <Button variant="text" type="submit">
+          Įvesti
+        </Button>
+      </form>
+    </Container>
   );
 };
 
