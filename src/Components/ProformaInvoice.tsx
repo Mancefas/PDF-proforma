@@ -6,7 +6,7 @@ import ProformaSign from "./ProformaSign";
 import Seller from "./Seller";
 import Totals from "./Totals";
 
-import Document from "./Document";
+import PdfDocument from "./PdfDocument";
 
 type sellerType = {
   sellerCompany: string;
@@ -82,10 +82,10 @@ const ProformaInvoice = () => {
         }}
       >
         <Button variant="text" onClick={submitHandler}>
-          Gauti proforma
+          Daryti proformą
         </Button>
-        <Document formInputs={formInputs} />
       </Box>
+      <PdfDocument />
     </>
   );
 };
