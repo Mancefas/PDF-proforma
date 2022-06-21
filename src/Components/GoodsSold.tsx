@@ -1,5 +1,5 @@
 import { Typography, Box, TextField, Button, Container } from "@mui/material";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 const dataFields = [
   {
@@ -19,16 +19,14 @@ const dataFields = [
   },
 ];
 
-const GoodsSold = ({ setGoods = () => {} }: any) => {
+const GoodsSold = ({ setGoods = () => {}, trigger = () => {} }: any) => {
   const soldGoodsName = useRef<HTMLInputElement>(null);
   const soldGoodsUnit = useRef<HTMLInputElement>(null);
   const soldGoodsQuantity = useRef<HTMLInputElement>(null);
   const soldGoodsPrice = useRef<HTMLInputElement>(null);
   const soldGoodsTotalPrice = useRef<HTMLInputElement>(null);
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const submitHandler = () => {
     // get value first and then setGoods
     if (
       soldGoodsName.current?.value &&
@@ -47,6 +45,12 @@ const GoodsSold = ({ setGoods = () => {} }: any) => {
     }
   };
 
+  useEffect(() => {
+    if (trigger === true) {
+      submitHandler();
+    }
+  }, [trigger]);
+
   return (
     <Container
       sx={{
@@ -56,8 +60,7 @@ const GoodsSold = ({ setGoods = () => {} }: any) => {
         alignItems: "center",
       }}
     >
-      <form
-        onSubmit={submitHandler}
+      <Container
         style={{
           display: "flex",
           marginTop: "2rem",
@@ -89,11 +92,7 @@ const GoodsSold = ({ setGoods = () => {} }: any) => {
             ></TextField>
           </Box>
         ))}
-
-        <Button variant="text" type="submit">
-          Įvesti
-        </Button>
-      </form>
+      </Container>
     </Container>
   );
 };

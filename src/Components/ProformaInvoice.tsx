@@ -9,12 +9,12 @@ import Totals from "./Totals";
 import PdfDocument from "./PdfDocument";
 
 type sellerType = {
-  sellerCompany: string;
-  sellerAddress: string;
-  sellerCompanyCode: number | null;
-  sellerBankAccNr: string;
-  sellerBankCode: string;
-  sellerBankName: string;
+  company: string;
+  address: string;
+  companyCode: number | null;
+  bankAccNr: string;
+  bankSwiftCode: string;
+  bankName: string;
 };
 type buyerType = {
   company: string;
@@ -36,7 +36,7 @@ type goodsType = {
 };
 
 const ProformaInvoice = () => {
-  const [formInputs, setFormInputs] = useState({});
+  const [formInputs, setFormInputs] = useState<{} | undefined>(undefined);
 
   const [seller, setSeller] = useState<sellerType | null>(null);
   const [buyer, setBuyer] = useState<buyerType | null>(null);
@@ -45,10 +45,15 @@ const ProformaInvoice = () => {
     null
   );
 
+  const [getDataFromComponents, setGetDataFromComponents] =
+    useState<boolean>(false);
+
   const submitHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+    setGetDataFromComponents(true);
+
     if (
       seller != null &&
       buyer != null &&
@@ -68,11 +73,14 @@ const ProformaInvoice = () => {
     <>
       <ProformaSign />
       <Container sx={{ display: "flex", flexDirection: "row" }}>
-        <Seller setSeller={setSeller} />
-        <Buyer setBuyer={setBuyer} />
+        <Seller setSeller={setSeller} trigger={getDataFromComponents} />
+        <Buyer setBuyer={setBuyer} trigger={getDataFromComponents} />
       </Container>
-      <GoodsSold setGoods={setGoods} />
-      <Totals setTotalAndPayDate={setTotalAndPayDate} />
+      <GoodsSold setGoods={setGoods} trigger={getDataFromComponents} />
+      <Totals
+        setTotalAndPayDate={setTotalAndPayDate}
+        trigger={getDataFromComponents}
+      />
       <Box
         sx={{
           display: "flex",
@@ -80,9 +88,11 @@ const ProformaInvoice = () => {
           justifyContent: "center",
         }}
       >
-        <Button variant="text" onClick={submitHandler}>
-          Daryti proformą
-        </Button>
+        {!formInputs && (
+          <Button variant="text" onClick={submitHandler}>
+            Gaminti proformą
+          </Button>
+        )}
       </Box>
       <PdfDocument formInputs={formInputs} />
     </>

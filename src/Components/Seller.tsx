@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { Typography, TextField, Container, Button } from "@mui/material";
+import { useRef, useEffect } from "react";
+import { Typography, TextField, Container } from "@mui/material";
 
 const dataFields = [
   { id: "1", label: "UAB Įmonė", name: "sellerCompany", type: "text" },
@@ -15,7 +15,13 @@ const dataFields = [
   { id: "6", label: "Bankas", name: "sellerBankName", type: "text" },
 ];
 
-const Seller = ({ setSeller = () => {} }: any) => {
+// type propsTypes = {
+//   setSeller: (seller: sellerType) => {};
+//   triger: true | false;
+// };
+//: FC<propsTypes>
+
+const Seller = ({ setSeller = () => {}, trigger = () => {} }: any) => {
   const sellerCompany = useRef<HTMLInputElement>(null);
   const sellerAddress = useRef<HTMLInputElement>(null);
   const sellerCompanyCode = useRef<HTMLInputElement>(null);
@@ -23,9 +29,7 @@ const Seller = ({ setSeller = () => {} }: any) => {
   const sellerBankSwiftCode = useRef<HTMLInputElement>(null);
   const sellerBankName = useRef<HTMLInputElement>(null);
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const submitHandler = () => {
     if (
       sellerCompany.current?.value &&
       sellerAddress.current?.value &&
@@ -44,14 +48,18 @@ const Seller = ({ setSeller = () => {} }: any) => {
       });
     }
   };
+
+  useEffect(() => {
+    if (trigger === true) {
+      submitHandler();
+    }
+  }, [trigger]);
+
   return (
     <Container maxWidth="xs">
       <Typography variant="h5">Pardavėjas</Typography>
 
-      <form
-        onSubmit={submitHandler}
-        style={{ display: "flex", flexDirection: "column" }}
-      >
+      <Container style={{ display: "flex", flexDirection: "column" }}>
         {dataFields.map((element) => (
           <TextField
             key={element.id}
@@ -76,10 +84,7 @@ const Seller = ({ setSeller = () => {} }: any) => {
             }
           ></TextField>
         ))}
-        <Button variant="text" type="submit">
-          Įvesti
-        </Button>
-      </form>
+      </Container>
     </Container>
   );
 };

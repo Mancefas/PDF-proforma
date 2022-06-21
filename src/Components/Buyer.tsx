@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { Typography, Box, TextField, Container, Button } from "@mui/material";
+import { useRef, useEffect } from "react";
+import { Typography, Box, TextField, Container } from "@mui/material";
 
 // if needed to map fields later
 // const dataFields = [
@@ -8,14 +8,12 @@ import { Typography, Box, TextField, Container, Button } from "@mui/material";
 //   { id: 3, label: "Įmonės kodas", ref: "buyerCode", type: "number" },
 // ];
 
-const Buyer = ({ setBuyer = () => {} }: any) => {
+const Buyer = ({ setBuyer = () => {}, trigger = () => {} }: any) => {
   const buyerCompanyName = useRef<HTMLInputElement>(null);
   const buyerCompanyAddress = useRef<HTMLInputElement>(null);
   const buyerCode = useRef<HTMLInputElement>(null);
 
-  const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const formSubmitHandler = () => {
     setBuyer({
       company: buyerCompanyName.current?.value,
       adress: buyerCompanyAddress.current?.value,
@@ -23,14 +21,17 @@ const Buyer = ({ setBuyer = () => {} }: any) => {
     });
   };
 
+  useEffect(() => {
+    if (trigger === true) {
+      formSubmitHandler();
+    }
+  }, [trigger]);
+
   return (
     <Container maxWidth="xs">
       <Typography variant="h5">Pirkėjas</Typography>
       <Box>
-        <form
-          onSubmit={formSubmitHandler}
-          style={{ display: "flex", flexDirection: "column" }}
-        >
+        <Container style={{ display: "flex", flexDirection: "column" }}>
           <TextField
             variant="outlined"
             label="UAB Įmonė"
@@ -47,10 +48,7 @@ const Buyer = ({ setBuyer = () => {} }: any) => {
             type="number"
             inputRef={buyerCode}
           ></TextField>
-          <Button variant="text" type="submit">
-            Įvesti
-          </Button>
-        </form>
+        </Container>
       </Box>
     </Container>
   );

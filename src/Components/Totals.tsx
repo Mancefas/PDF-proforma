@@ -1,12 +1,11 @@
-import { useRef } from "react";
-import { Typography, Container, TextField, Box, Button } from "@mui/material";
+import { useRef, useEffect } from "react";
+import { Typography, Container, TextField, Box } from "@mui/material";
 
-const Totals = ({ setTotalAndPayDate = () => {} }: any) => {
+const Totals = ({ setTotalAndPayDate = () => {}, trigger = () => {} }: any) => {
   const totalAmount = useRef<HTMLInputElement>(null);
   const payUntilDate = useRef<HTMLInputElement>(null);
 
-  const sumbitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const sumbitHandler = () => {
     if (totalAmount && payUntilDate != null) {
       setTotalAndPayDate({
         totalAmount: totalAmount.current?.value,
@@ -14,6 +13,12 @@ const Totals = ({ setTotalAndPayDate = () => {} }: any) => {
       });
     }
   };
+
+  useEffect(() => {
+    if (trigger === true) {
+      sumbitHandler();
+    }
+  }, [trigger]);
 
   return (
     <Container
@@ -25,8 +30,7 @@ const Totals = ({ setTotalAndPayDate = () => {} }: any) => {
         alignItems: "flex-end",
       }}
     >
-      <form
-        onSubmit={sumbitHandler}
+      <Container
         style={{
           marginTop: "2rem",
           display: "flex",
@@ -59,10 +63,7 @@ const Totals = ({ setTotalAndPayDate = () => {} }: any) => {
             inputRef={payUntilDate}
           ></TextField>
         </Box>
-        <Button variant="text" type="submit">
-          Įvesti
-        </Button>
-      </form>
+      </Container>
     </Container>
   );
 };
