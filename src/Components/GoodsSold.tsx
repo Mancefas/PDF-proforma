@@ -11,12 +11,6 @@ const dataFields = [
   { id: "2", text: "Mato vnt.", type: "text", name: "unit" },
   { id: "3", text: "Kiekis", type: "number", name: "quantity" },
   { id: "4", text: "Kaina", type: "number", name: "price" },
-  {
-    id: "5",
-    text: "Suma EUR",
-    type: "number",
-    name: "totalPrice",
-  },
 ];
 
 const GoodsSold = ({ setGoods = () => {}, trigger = () => {} }: any) => {
@@ -24,7 +18,6 @@ const GoodsSold = ({ setGoods = () => {}, trigger = () => {} }: any) => {
   const soldGoodsUnit = useRef<HTMLInputElement>(null);
   const soldGoodsQuantity = useRef<HTMLInputElement>(null);
   const soldGoodsPrice = useRef<HTMLInputElement>(null);
-  const soldGoodsTotalPrice = useRef<HTMLInputElement>(null);
 
   const submitHandler = () => {
     // get value first and then setGoods
@@ -32,15 +25,13 @@ const GoodsSold = ({ setGoods = () => {}, trigger = () => {} }: any) => {
       soldGoodsName.current?.value &&
       soldGoodsUnit.current?.value &&
       soldGoodsQuantity.current?.value &&
-      soldGoodsPrice.current?.value &&
-      soldGoodsTotalPrice.current?.value
+      soldGoodsPrice.current?.value
     ) {
       setGoods({
         goodsName: soldGoodsName.current?.value!,
         unit: soldGoodsUnit.current?.value!,
         quantity: +soldGoodsQuantity.current?.value!,
         price: +soldGoodsPrice.current?.value!,
-        totalPrice: +soldGoodsTotalPrice.current?.value!,
       });
     }
   };
@@ -84,8 +75,6 @@ const GoodsSold = ({ setGoods = () => {}, trigger = () => {} }: any) => {
                   ? soldGoodsQuantity
                   : element.name === "price"
                   ? soldGoodsPrice
-                  : element.name === "totalPrice"
-                  ? soldGoodsTotalPrice
                   : null
               }
               type={element.type}
