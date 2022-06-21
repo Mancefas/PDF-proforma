@@ -1,7 +1,7 @@
 import { jsPDF } from "jspdf";
 import { Box, Button } from "@mui/material";
 
-const PdfDocument = ({ formInputs, seller, buyer, goods }: any) => {
+const PdfDocument = ({ numberAndDate, seller, buyer, goods }: any) => {
   const createPDFDif = () => {
     const doc = new jsPDF("portrait", "pt", "a4");
     doc.addFont("/Fonts/Roboto-normal.ttf", "Roboto", "normal");
@@ -14,7 +14,10 @@ const PdfDocument = ({ formInputs, seller, buyer, goods }: any) => {
     doc.setFont("times", "normal");
     doc.setFontSize(16);
 
-    const proformaNumberDate = ["Numeris", "Data"];
+    const proformaNumberDate = [
+      `${numberAndDate.proformaNumber}`,
+      `${numberAndDate.proformaDate}`,
+    ];
     doc.text(proformaNumberDate, 250, 70);
 
     // Seller Component in pdf
@@ -26,7 +29,7 @@ const PdfDocument = ({ formInputs, seller, buyer, goods }: any) => {
       `${seller.company}`,
       `${seller.address}`,
       `Įm.kodas ${seller.companyCode}`,
-      `Banko sąsk ${seller.bankCode}`,
+      `Banko sąsk ${seller.bankAccNr}`,
       `Banko SWIFT ${seller.bankSwiftCode}`,
       `Bankas ${seller.bankName}`,
     ];

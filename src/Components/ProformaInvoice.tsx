@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import { Container, Button, Box } from "@mui/material";
+import { useState } from "react";
+import { Container, Button, Box, Typography } from "@mui/material";
 import Buyer from "./Buyer";
 import GoodsSold from "./GoodsSold";
-import ProformaSign from "./ProformaSign";
 import Seller from "./Seller";
-import Totals from "./Totals";
+import NumberAndDate from "./NumberAndDate";
 
 import PdfDocument from "./PdfDocument";
 
@@ -22,9 +21,9 @@ type buyerType = {
   code: number;
 };
 
-type objectType = {
-  totalAmount: string;
-  payUntilDate: string;
+type numberAndDateType = {
+  proformaNumber: string;
+  proformaDate: string;
 };
 
 type goodsType = {
@@ -36,12 +35,14 @@ type goodsType = {
 };
 
 const ProformaInvoice = () => {
-  const [seller, setSeller] = useState<sellerType | null>(null);
-  const [buyer, setBuyer] = useState<buyerType | null>(null);
-  const [goods, setGoods] = useState<goodsType | null>(null);
-  const [totalAndPayDate, setTotalAndPayDate] = useState<objectType | null>(
+  const [seller, setSeller] = useState<sellerType | undefined>(undefined);
+  const [buyer, setBuyer] = useState<buyerType | undefined>(undefined);
+  const [goods, setGoods] = useState<goodsType | undefined>(undefined);
+  const [numberAndDate, setNumberAndDate] = useState<numberAndDateType | null>(
     null
   );
+
+  console.log(seller);
 
   const [getDataFromComponents, setGetDataFromComponents] =
     useState<boolean>(false);
@@ -55,16 +56,18 @@ const ProformaInvoice = () => {
 
   return (
     <>
-      <ProformaSign />
+      <Typography variant="h3" align="center">
+        Išankstinė sąskaita-faktūra
+      </Typography>
+      <NumberAndDate
+        setNumberAndDate={setNumberAndDate}
+        trigger={getDataFromComponents}
+      />
       <Container sx={{ display: "flex", flexDirection: "row" }}>
         <Seller setSeller={setSeller} trigger={getDataFromComponents} />
         <Buyer setBuyer={setBuyer} trigger={getDataFromComponents} />
       </Container>
       <GoodsSold setGoods={setGoods} trigger={getDataFromComponents} />
-      <Totals
-        setTotalAndPayDate={setTotalAndPayDate}
-        trigger={getDataFromComponents}
-      />
       <Box
         sx={{
           display: "flex",
@@ -72,13 +75,18 @@ const ProformaInvoice = () => {
           justifyContent: "center",
         }}
       >
-        {!seller && !buyer && !goods && (
+        {seller == undefined && (
           <Button variant="text" onClick={submitHandler}>
             Gaminti proformą
           </Button>
         )}
       </Box>
-      <PdfDocument seller={seller} buyer={buyer} goods={goods} />
+      <PdfDocument
+        seller={seller}
+        buyer={buyer}
+        goods={goods}
+        numberAndDate={numberAndDate}
+      />
     </>
   );
 };
