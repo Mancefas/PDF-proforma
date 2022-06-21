@@ -1,7 +1,7 @@
 import { jsPDF } from "jspdf";
 import { Box, Button } from "@mui/material";
 
-const PdfDocument = ({ formInputs = () => {} }: any) => {
+const PdfDocument = ({ formInputs, seller, buyer, goods }: any) => {
   const createPDFDif = () => {
     const doc = new jsPDF("portrait", "pt", "a4");
     doc.addFont("/Fonts/Roboto-normal.ttf", "Roboto", "normal");
@@ -22,46 +22,43 @@ const PdfDocument = ({ formInputs = () => {} }: any) => {
 
     doc.text("Pardavėjas", 50, 150);
     doc.setFontSize(12);
-    const seller = [
-      `${formInputs.seller.company}`,
-      `${formInputs.seller.address}`,
-      `Įm.kodas ${formInputs.seller.companyCode}`,
-      `Banko sąsk ${formInputs.seller.bankCode}`,
-      `Banko SWIFT ${formInputs.seller.bankSwiftCode}`,
-      `Bankas ${formInputs.seller.bankName}`,
+    const sellerData = [
+      `${seller.company}`,
+      `${seller.address}`,
+      `Įm.kodas ${seller.companyCode}`,
+      `Banko sąsk ${seller.bankCode}`,
+      `Banko SWIFT ${seller.bankSwiftCode}`,
+      `Bankas ${seller.bankName}`,
     ];
-    doc.text(seller, 50, 175);
+    doc.text(sellerData, 50, 175);
 
     // Buyer component in pdf
     doc.setFontSize(16);
     doc.text("Pirkėjas", 425, 150);
     doc.setFontSize(12);
-    const buyer = [
-      `${formInputs.buyer.company}`,
-      `${formInputs.buyer.adress}`,
-      `Įm. kodas ${formInputs.buyer.code}`,
+    const buyerData = [
+      `${buyer.company}`,
+      `${buyer.adress}`,
+      `Įm. kodas ${buyer.code}`,
     ];
-    doc.text(buyer, 425, 175);
+    doc.text(buyerData, 425, 175);
 
     //Goods component in pdf
     doc.setFontSize(12);
 
-    const goodsName = ["Prekės pavadinimas", `${formInputs.goods.goodsName}`];
+    const goodsName = ["Prekės pavadinimas", `${goods.goodsName}`];
     doc.text(goodsName, 20, 400);
 
-    const units = ["Mato vnt.", `${formInputs.goods.unit}`];
+    const units = ["Mato vnt.", `${goods.unit}`];
     doc.text(units, 200, 400);
 
-    const quantity = ["Kiekis", `${formInputs.goods.quantity}`];
+    const quantity = ["Kiekis", `${goods.quantity}`];
     doc.text(quantity, 300, 400);
 
-    const priceOneUnit = ["Kaina", `${formInputs.goods.price}`];
+    const priceOneUnit = ["Kaina", `${goods.price}`];
     doc.text(priceOneUnit, 400, 400);
 
-    const totalPrice = [
-      "Suma EUR",
-      `${formInputs.goods.quantity * formInputs.goods.price}`,
-    ];
+    const totalPrice = ["Suma EUR", `${goods.quantity * goods.price}`];
     doc.text(totalPrice, 500, 400);
 
     //Numbers in words in pdf
@@ -81,7 +78,7 @@ const PdfDocument = ({ formInputs = () => {} }: any) => {
         marginTop: "1rem",
       }}
     >
-      {formInputs.seller && (
+      {seller && buyer && goods && (
         <Button variant="contained" onClick={createPDFDif} type="button">
           Atsisiųsti proformą
         </Button>

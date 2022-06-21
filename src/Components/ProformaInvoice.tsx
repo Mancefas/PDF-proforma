@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Button, Box } from "@mui/material";
 import Buyer from "./Buyer";
 import GoodsSold from "./GoodsSold";
@@ -36,8 +36,6 @@ type goodsType = {
 };
 
 const ProformaInvoice = () => {
-  const [formInputs, setFormInputs] = useState<{} | undefined>(undefined);
-
   const [seller, setSeller] = useState<sellerType | null>(null);
   const [buyer, setBuyer] = useState<buyerType | null>(null);
   const [goods, setGoods] = useState<goodsType | null>(null);
@@ -53,20 +51,6 @@ const ProformaInvoice = () => {
   ) => {
     e.preventDefault();
     setGetDataFromComponents(true);
-
-    if (
-      seller != null &&
-      buyer != null &&
-      goods != null &&
-      totalAndPayDate != null
-    ) {
-      setFormInputs({
-        seller: seller,
-        buyer: buyer,
-        goods: goods,
-        totalAndPayDate: totalAndPayDate,
-      });
-    }
   };
 
   return (
@@ -88,13 +72,13 @@ const ProformaInvoice = () => {
           justifyContent: "center",
         }}
       >
-        {!formInputs && (
+        {!seller && !buyer && !goods && (
           <Button variant="text" onClick={submitHandler}>
             Gaminti proformą
           </Button>
         )}
       </Box>
-      <PdfDocument formInputs={formInputs} />
+      <PdfDocument seller={seller} buyer={buyer} goods={goods} />
     </>
   );
 };
