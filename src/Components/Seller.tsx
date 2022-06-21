@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { Typography, TextField, Container, Button } from "@mui/material";
 
-// for DRY later
 const dataFields = [
   { id: "1", label: "UAB Įmonė", name: "sellerCompany", type: "text" },
   {
@@ -36,12 +35,12 @@ const Seller = ({ setSeller = () => {} }: any) => {
       sellerBankName.current?.value
     ) {
       setSeller({
-        sellerCompany: sellerCompany.current?.value,
-        sellerAddress: sellerAddress.current?.value,
-        sellerCompanyCode: +sellerCompanyCode.current?.value,
-        sellerBankAccNr: sellerBankAccNr.current?.value,
-        sellerBankCode: sellerBankSwiftCode.current?.value,
-        sellerBankName: sellerBankName.current?.value,
+        company: sellerCompany.current?.value,
+        address: sellerAddress.current?.value,
+        companyCode: +sellerCompanyCode.current?.value,
+        bankAccNr: sellerBankAccNr.current?.value,
+        bankSwiftCode: sellerBankSwiftCode.current?.value,
+        bankName: sellerBankName.current?.value,
       });
     }
   };

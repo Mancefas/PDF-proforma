@@ -22,12 +22,12 @@ const PdfDocument = ({ formInputs = () => {} }: any) => {
 
     doc.text("Pardavėjas", 50, 150);
     const seller = [
-      `${formInputs.seller.sellerCompany}`,
-      `${formInputs.seller.sellerAddress}`,
-      `${formInputs.seller.sellerCompanyCode}`,
-      `${formInputs.seller.sellerBankCode}`,
-      `${formInputs.seller.sellerBankCode}`,
-      `${formInputs.seller.sellerBankName}`,
+      `${formInputs.seller.company}`,
+      `${formInputs.seller.address}`,
+      `${formInputs.seller.companyCode}`,
+      `${formInputs.seller.bankCode}`,
+      `${formInputs.seller.bankCode}`,
+      `${formInputs.seller.bankName}`,
     ];
     doc.text(seller, 50, 175);
 
