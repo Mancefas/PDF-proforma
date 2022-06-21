@@ -37,7 +37,6 @@ type goodsType = {
 
 const ProformaInvoice = () => {
   const [formInputs, setFormInputs] = useState({});
-  console.log(formInputs);
 
   const [seller, setSeller] = useState<sellerType | null>(null);
   const [buyer, setBuyer] = useState<buyerType | null>(null);
@@ -85,7 +84,7 @@ const ProformaInvoice = () => {
           Daryti proformą
         </Button>
       </Box>
-      <PdfDocument />
+      <PdfDocument formInputs={formInputs} />
     </>
   );
 };

@@ -1,12 +1,32 @@
 import { jsPDF } from "jspdf";
 
-const PdfDocument = () => {
-  const createPDF = async () => {
-    const pdf = new jsPDF("portrait", "pt", "a4");
-    const element = (await document.querySelector("#pdf")) as HTMLElement;
-    pdf.html(element).then(() => {
-      pdf.save("proforma_invoice.pdf");
-    });
+const PdfDocument = ({ formInputs = () => {} }: any) => {
+  const createPDFDif = () => {
+    const doc = new jsPDF("portrait", "pt", "a4");
+    doc.text("Proforma invoice", 250, 20);
+
+    // Seller Component in pdf
+    doc.text("Pardavėjas", 50, 75);
+    const seller = [
+      `${formInputs.seller.sellerCompany}`,
+      `${formInputs.seller.sellerAddress}`,
+      `${formInputs.seller.sellerCompanyCode}`,
+      `${formInputs.seller.sellerBankCode}`,
+      `${formInputs.seller.sellerBankCode}`,
+      `${formInputs.seller.sellerBankName}`,
+    ];
+    doc.text(seller, 50, 100);
+
+    // Buyer component in pdf
+    doc.text("Pirkėjas", 400, 75);
+    const buyer = [
+      `${formInputs.buyer.company}`,
+      `${formInputs.buyer.adresas}`,
+      `${formInputs.buyer.code}`,
+    ];
+    doc.text(buyer, 400, 100);
+
+    doc.save("demo.pdf");
   };
 
   return (
@@ -41,7 +61,7 @@ const PdfDocument = () => {
         <p>Pardavejo adresas</p>
         <p>Imones kodas</p>
       </div>
-      <button onClick={createPDF} type="button">
+      <button onClick={createPDFDif} type="button">
         Atsisiųsti
       </button>
     </div>
