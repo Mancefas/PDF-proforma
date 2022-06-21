@@ -43,22 +43,25 @@ const PdfDocument = ({ formInputs = () => {} }: any) => {
     //Goods component in pdf
     doc.setFontSize(12);
 
-    const goodsName = ["Prekės pavadinimas", "Name of goods"];
+    const goodsName = ["Prekės pavadinimas", `${formInputs.goods.goodsName}`];
     doc.text(goodsName, 20, 400);
 
-    const units = ["Mato vnt.", "m2"];
+    const units = ["Mato vnt.", `${formInputs.goods.unit}`];
     doc.text(units, 200, 400);
 
-    const quantity = ["Kiekis", "2"];
+    const quantity = ["Kiekis", `${formInputs.goods.quantity}`];
     doc.text(quantity, 300, 400);
 
-    const priceOneUnit = ["Kaina", "100"];
+    const priceOneUnit = ["Kaina", `${formInputs.goods.price}`];
     doc.text(priceOneUnit, 400, 400);
 
-    const totalPrice = ["Suma EUR", "200"];
+    const totalPrice = [
+      "Suma EUR",
+      `${formInputs.goods.quantity * formInputs.goods.price}`,
+    ];
     doc.text(totalPrice, 500, 400);
 
-    //Numbers in words and due date in pdf
+    //Numbers in words in pdf
     doc.text("Viso suma žodžiais :", 150, 475);
     doc.text(" pvz Du šimtai eurų", 300, 475);
 
