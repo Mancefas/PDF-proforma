@@ -21,22 +21,25 @@ const PdfDocument = ({ formInputs = () => {} }: any) => {
     doc.setFont("Roboto", "normal");
 
     doc.text("Pardavėjas", 50, 150);
+    doc.setFontSize(12);
     const seller = [
       `${formInputs.seller.company}`,
       `${formInputs.seller.address}`,
-      `${formInputs.seller.companyCode}`,
-      `${formInputs.seller.bankCode}`,
-      `${formInputs.seller.bankCode}`,
-      `${formInputs.seller.bankName}`,
+      `Įm.kodas ${formInputs.seller.companyCode}`,
+      `Banko sąsk ${formInputs.seller.bankCode}`,
+      `Banko SWIFT ${formInputs.seller.bankSwiftCode}`,
+      `Bankas ${formInputs.seller.bankName}`,
     ];
     doc.text(seller, 50, 175);
 
     // Buyer component in pdf
+    doc.setFontSize(16);
     doc.text("Pirkėjas", 425, 150);
+    doc.setFontSize(12);
     const buyer = [
       `${formInputs.buyer.company}`,
       `${formInputs.buyer.adress}`,
-      `${formInputs.buyer.code}`,
+      `Įm. kodas ${formInputs.buyer.code}`,
     ];
     doc.text(buyer, 425, 175);
 
