@@ -15,13 +15,20 @@ const dataFields = [
   { id: "6", label: "Bankas", name: "sellerBankName", type: "text" },
 ];
 
-// type propsTypes = {
-//   setSeller: (seller: sellerType) => {};
-//   triger: true | false;
-// };
-//: FC<propsTypes>
+type SellerProps = {
+  setSeller: (item: {
+    company: string;
+    address: string;
+    companyCode: number;
+    bankAccNr: string;
+    bankSwiftCode: string;
+    bankName: string;
+  }) => void;
 
-const Seller = ({ setSeller = () => {}, trigger = () => {} }: any) => {
+  trigger: boolean;
+};
+
+const Seller = ({ setSeller, trigger }: SellerProps) => {
   const sellerCompany = useRef<HTMLInputElement>(null);
   const sellerAddress = useRef<HTMLInputElement>(null);
   const sellerCompanyCode = useRef<HTMLInputElement>(null);

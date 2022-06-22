@@ -13,7 +13,17 @@ const dataFields = [
   { id: "4", text: "Kaina", type: "number", name: "price" },
 ];
 
-const GoodsSold = ({ setGoods = () => {}, trigger = () => {} }: any) => {
+type GoodsSoldProps = {
+  setGoods: (id: {
+    goodsName: string;
+    unit: string;
+    quantity: number;
+    price: number;
+  }) => void;
+  trigger: boolean;
+};
+
+const GoodsSold = ({ setGoods = () => {}, trigger }: GoodsSoldProps) => {
   const soldGoodsName = useRef<HTMLInputElement>(null);
   const soldGoodsUnit = useRef<HTMLInputElement>(null);
   const soldGoodsQuantity = useRef<HTMLInputElement>(null);

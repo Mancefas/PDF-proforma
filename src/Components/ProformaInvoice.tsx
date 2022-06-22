@@ -10,14 +10,14 @@ import PdfDocument from "./PdfDocument";
 type sellerType = {
   company: string;
   address: string;
-  companyCode: number | null;
+  companyCode: number;
   bankAccNr: string;
   bankSwiftCode: string;
   bankName: string;
 };
 type buyerType = {
   company: string;
-  adress: string;
+  address: string;
   code: number;
 };
 
@@ -29,20 +29,15 @@ type numberAndDateType = {
 type goodsType = {
   goodsName: string;
   unit: string;
-  quantity: number | null;
-  price: number | null;
-  totalPrice: number | null;
+  quantity: number;
+  price: number;
 };
 
 const ProformaInvoice = () => {
-  const [seller, setSeller] = useState<sellerType | undefined>(undefined);
-  const [buyer, setBuyer] = useState<buyerType | undefined>(undefined);
-  const [goods, setGoods] = useState<goodsType | undefined>(undefined);
-  const [numberAndDate, setNumberAndDate] = useState<numberAndDateType | null>(
-    null
-  );
-
-  console.log(seller);
+  const [seller, setSeller] = useState<sellerType>();
+  const [buyer, setBuyer] = useState<buyerType>();
+  const [goods, setGoods] = useState<goodsType>();
+  const [numberAndDate, setNumberAndDate] = useState<numberAndDateType>();
 
   const [getDataFromComponents, setGetDataFromComponents] =
     useState<boolean>(false);
@@ -82,10 +77,10 @@ const ProformaInvoice = () => {
         )}
       </Box>
       <PdfDocument
-        seller={seller}
-        buyer={buyer}
-        goods={goods}
-        numberAndDate={numberAndDate}
+        seller={seller!}
+        buyer={buyer!}
+        goods={goods!}
+        numberAndDate={numberAndDate!}
       />
     </>
   );

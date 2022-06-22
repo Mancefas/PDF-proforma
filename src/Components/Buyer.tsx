@@ -8,17 +8,28 @@ import { Typography, Box, TextField, Container } from "@mui/material";
 //   { id: 3, label: "Įmonės kodas", ref: "buyerCode", type: "number" },
 // ];
 
-const Buyer = ({ setBuyer = () => {}, trigger = () => {} }: any) => {
+type BuyerProps = {
+  setBuyer: (id: { company: string; address: string; code: number }) => void;
+  trigger: boolean;
+};
+
+const Buyer = ({ setBuyer, trigger }: BuyerProps) => {
   const buyerCompanyName = useRef<HTMLInputElement>(null);
   const buyerCompanyAddress = useRef<HTMLInputElement>(null);
   const buyerCode = useRef<HTMLInputElement>(null);
 
   const formSubmitHandler = () => {
-    setBuyer({
-      company: buyerCompanyName.current?.value,
-      adress: buyerCompanyAddress.current?.value,
-      code: buyerCode.current?.value,
-    });
+    if (
+      buyerCompanyName.current?.value &&
+      buyerCompanyAddress.current?.value &&
+      buyerCode.current?.value
+    ) {
+      setBuyer({
+        company: buyerCompanyName.current?.value,
+        address: buyerCompanyAddress.current?.value,
+        code: +buyerCode.current?.value,
+      });
+    }
   };
 
   useEffect(() => {

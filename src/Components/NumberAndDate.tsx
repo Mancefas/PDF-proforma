@@ -1,12 +1,24 @@
 import { useRef, useEffect } from "react";
 import { Container, TextField } from "@mui/material";
 
-const NumberAndDate = ({ trigger, setNumberAndDate = () => {} }: any) => {
+type NumberAndDateProps = {
+  trigger: boolean;
+  setNumberAndDate: (id: {
+    proformaNumber: string;
+    proformaDate: string;
+  }) => void;
+};
+
+const NumberAndDate = ({ trigger, setNumberAndDate }: NumberAndDateProps) => {
   const proformaNumber = useRef<HTMLInputElement>(null);
   const proformaDate = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (trigger === true) {
+    if (
+      trigger === true &&
+      proformaNumber.current?.value &&
+      proformaDate.current?.value
+    ) {
       setNumberAndDate({
         proformaNumber: proformaNumber.current?.value,
         proformaDate: proformaDate.current?.value,
