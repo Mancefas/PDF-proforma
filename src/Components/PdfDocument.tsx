@@ -54,9 +54,11 @@ const PdfDocument = ({
     //Proforma sign, number, date
     doc.setFont("helvetica", "bold");
     doc.setFontSize(22);
+    doc.setTextColor("blue");
     doc.text("Proforma invoice", 7, 2);
+    doc.setTextColor("black");
 
-    doc.setFont("times", "normal");
+    doc.setFont("times", "bold");
     doc.setFontSize(16);
 
     doc.text(numberAndDate.proformaNumber, 8, 3);
@@ -65,7 +67,9 @@ const PdfDocument = ({
     // Seller Component in pdf
     doc.setFont("Roboto", "normal");
 
+    doc.setTextColor("blue");
     doc.text("Pardavėjas", 3, 5);
+    doc.setTextColor("black");
     doc.setFontSize(12);
     const sellerData = [
       `${seller.company}`,
@@ -79,7 +83,9 @@ const PdfDocument = ({
 
     // Buyer component in pdf
     doc.setFontSize(16);
+    doc.setTextColor("blue");
     doc.text("Pirkėjas", 14, 5);
+    doc.setTextColor("black");
     doc.setFontSize(12);
     const buyerData = [
       `${buyer.company}`,
