@@ -25,6 +25,19 @@ type PdfDocumentProps = {
     quantity: number;
     price: number;
   };
+  setSeller: React.Dispatch<
+    React.SetStateAction<
+      | {
+          company: string;
+          address: string;
+          companyCode: number;
+          bankAccNr: string;
+          bankSwiftCode: string;
+          bankName: string;
+        }
+      | undefined
+    >
+  >;
 };
 
 const PdfDocument = ({
@@ -32,29 +45,27 @@ const PdfDocument = ({
   seller,
   buyer,
   goods,
+  setSeller,
 }: PdfDocumentProps) => {
   const createPDFDif = () => {
-    const doc = new jsPDF("portrait", "pt", "a4");
+    const doc = new jsPDF({ orientation: "p", unit: "cm", format: "a4" });
     doc.addFont("/Fonts/Roboto-normal.ttf", "Roboto", "normal");
 
     //Proforma sign, number, date
     doc.setFont("helvetica", "bold");
     doc.setFontSize(22);
-    doc.text("Proforma invoice", 220, 40);
+    doc.text("Proforma invoice", 7, 2);
 
     doc.setFont("times", "normal");
     doc.setFontSize(16);
 
-    const proformaNumberDate = [
-      `${numberAndDate.proformaNumber}`,
-      `${numberAndDate.proformaDate}`,
-    ];
-    doc.text(proformaNumberDate, 250, 70);
+    doc.text(numberAndDate.proformaNumber, 8, 3);
+    doc.text(numberAndDate.proformaDate, 10, 3);
 
     // Seller Component in pdf
     doc.setFont("Roboto", "normal");
 
-    doc.text("Pardavėjas", 50, 150);
+    doc.text("Pardavėjas", 3, 5);
     doc.setFontSize(12);
     const sellerData = [
       `${seller.company}`,
@@ -64,42 +75,44 @@ const PdfDocument = ({
       `Banko SWIFT ${seller.bankSwiftCode}`,
       `Bankas ${seller.bankName}`,
     ];
-    doc.text(sellerData, 50, 175);
+    doc.text(sellerData, 3, 6);
 
     // Buyer component in pdf
     doc.setFontSize(16);
-    doc.text("Pirkėjas", 425, 150);
+    doc.text("Pirkėjas", 14, 5);
     doc.setFontSize(12);
     const buyerData = [
       `${buyer.company}`,
       `${buyer.address}`,
       `Įm. kodas ${buyer.code}`,
     ];
-    doc.text(buyerData, 425, 175);
+    doc.text(buyerData, 14, 6);
 
     //Goods component in pdf
     doc.setFontSize(12);
 
     const goodsName = ["Prekės pavadinimas", `${goods.goodsName}`];
-    doc.text(goodsName, 20, 400);
+    doc.text(goodsName, 3, 12);
 
     const units = ["Mato vnt.", `${goods.unit}`];
-    doc.text(units, 200, 400);
+    doc.text(units, 8, 12);
 
     const quantity = ["Kiekis", `${goods.quantity}`];
-    doc.text(quantity, 300, 400);
+    doc.text(quantity, 12, 12);
 
     const priceOneUnit = ["Kaina", `${goods.price}`];
-    doc.text(priceOneUnit, 400, 400);
+    doc.text(priceOneUnit, 16, 12);
 
     const totalPrice = ["Suma EUR", `${goods.quantity * goods.price}`];
-    doc.text(totalPrice, 500, 400);
+    doc.text(totalPrice, 500, 12);
 
     //Numbers in words in pdf
-    doc.text("Viso suma žodžiais :", 150, 475);
-    doc.text(" pvz Du šimtai eurų", 300, 475);
+    // doc.text("Viso suma žodžiais :", 150, 475);
+    // doc.text(" pvz Du šimtai eurų", 300, 475);
 
     doc.save("proforma.pdf");
+
+    setSeller(undefined);
   };
 
   return (

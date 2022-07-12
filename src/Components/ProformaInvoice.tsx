@@ -46,7 +46,7 @@ const ProformaInvoice = () => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    setGetDataFromComponents(true);
+    setGetDataFromComponents((prevState) => !prevState);
   };
 
   return (
@@ -81,6 +81,7 @@ const ProformaInvoice = () => {
         buyer={buyer!}
         goods={goods!}
         numberAndDate={numberAndDate!}
+        setSeller={setSeller}
       />
     </>
   );
