@@ -64,11 +64,14 @@ const Seller = ({ setSeller, trigger }: SellerProps) => {
 
   return (
     <Container maxWidth="xs">
-      <Typography variant="h5">Pardavėjas</Typography>
+      <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
+        Pardavėjas
+      </Typography>
 
       <Container style={{ display: "flex", flexDirection: "column" }}>
         {dataFields.map((element) => (
           <TextField
+            sx={{ marginBottom: "0.5rem" }}
             key={element.id}
             variant="outlined"
             label={element.label}

@@ -40,20 +40,25 @@ const Buyer = ({ setBuyer, trigger }: BuyerProps) => {
 
   return (
     <Container maxWidth="xs">
-      <Typography variant="h5">Pirkėjas</Typography>
+      <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
+        Pirkėjas
+      </Typography>
       <Box>
         <Container style={{ display: "flex", flexDirection: "column" }}>
           <TextField
+            sx={{ marginBottom: "0.5rem" }}
             variant="outlined"
             label="UAB Įmonė"
             inputRef={buyerCompanyName}
           ></TextField>
           <TextField
+            sx={{ marginBottom: "0.5rem" }}
             variant="outlined"
             label="Įmonės adresas"
             inputRef={buyerCompanyAddress}
           ></TextField>
           <TextField
+            sx={{ marginBottom: "0.5rem" }}
             variant="outlined"
             label="Įmonės kodas"
             type="number"

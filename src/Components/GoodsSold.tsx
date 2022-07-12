@@ -73,6 +73,7 @@ const GoodsSold = ({ setGoods = () => {}, trigger }: GoodsSoldProps) => {
           <Box key={element.id}>
             <Typography variant="h6">{element.text}</Typography>
             <TextField
+              sx={{ marginLeft: "0.5rem" }}
               variant="outlined"
               name={element.name}
               label={element.text}
