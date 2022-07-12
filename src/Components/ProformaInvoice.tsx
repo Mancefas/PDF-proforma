@@ -70,7 +70,7 @@ const ProformaInvoice = () => {
           justifyContent: "center",
         }}
       >
-        {seller == undefined && (
+        {seller === undefined && (
           <Button variant="text" onClick={submitHandler}>
             Gaminti proformą
           </Button>
