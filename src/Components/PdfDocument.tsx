@@ -52,7 +52,7 @@ const PdfDocument = ({
     doc.addFont("/Fonts/Roboto-normal.ttf", "Roboto", "normal");
 
     //Proforma sign, number, date
-    doc.setFont("helvetica", "bold");
+    doc.setFont("Roboto", "normal");
     doc.setFontSize(22);
     doc.setTextColor("blue");
     doc.text("Sąskaita proforma", 7, 2);
