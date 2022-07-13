@@ -42,6 +42,7 @@ const NumberAndDate = ({ trigger, setNumberAndDate }: NumberAndDateProps) => {
         sx={{ marginLeft: "2rem" }}
         type="text"
         inputRef={proformaNumber}
+        defaultValue="0001"
       />
       <TextField
         variant="outlined"

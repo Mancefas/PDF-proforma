@@ -55,7 +55,7 @@ const PdfDocument = ({
     doc.setFont("helvetica", "bold");
     doc.setFontSize(22);
     doc.setTextColor("blue");
-    doc.text("Proforma invoice", 7, 2);
+    doc.text("Sąskaita proforma", 7, 2);
     doc.setTextColor("black");
 
     doc.setFont("times", "bold");
@@ -117,8 +117,6 @@ const PdfDocument = ({
     // doc.text(" pvz Du šimtai eurų", 300, 475);
 
     doc.save("proforma.pdf");
-
-    setSeller(undefined);
   };
 
   return (
