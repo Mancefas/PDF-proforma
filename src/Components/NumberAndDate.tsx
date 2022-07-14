@@ -38,6 +38,7 @@ const NumberAndDate = ({ trigger, setNumberAndDate }: NumberAndDateProps) => {
         proformaDate: proformaDate.current?.value,
       });
     }
+    // eslint-disable-next-line
   }, [trigger]);
 
   return (

@@ -36,6 +36,7 @@ const Buyer = ({ setBuyer, trigger }: BuyerProps) => {
     if (trigger === true) {
       formSubmitHandler();
     }
+    // eslint-disable-next-line
   }, [trigger]);
 
   return (

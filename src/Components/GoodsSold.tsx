@@ -1,4 +1,4 @@
-import { Typography, Box, TextField, Button, Container } from "@mui/material";
+import { Typography, Box, TextField, Container } from "@mui/material";
 import { useRef, useEffect } from "react";
 
 const dataFields = [
@@ -50,6 +50,7 @@ const GoodsSold = ({ setGoods = () => {}, trigger }: GoodsSoldProps) => {
     if (trigger === true) {
       submitHandler();
     }
+    // eslint-disable-next-line
   }, [trigger]);
 
   return (

@@ -60,6 +60,7 @@ const Seller = ({ setSeller, trigger }: SellerProps) => {
     if (trigger === true) {
       submitHandler();
     }
+    // eslint-disable-next-line
   }, [trigger]);
 
   return (
