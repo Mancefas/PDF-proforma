@@ -13,6 +13,20 @@ const NumberAndDate = ({ trigger, setNumberAndDate }: NumberAndDateProps) => {
   const proformaNumber = useRef<HTMLInputElement>(null);
   const proformaDate = useRef<HTMLInputElement>(null);
 
+  const dateNow = new Date(); // Creating a new date object with the current date and time
+  const year = dateNow.getFullYear(); // Getting current year from the created Date object
+  const monthWithOffset = dateNow.getUTCMonth() + 1; // Months counted from 0 in JS
+  const month = // Setting current Month number from current Date object
+    monthWithOffset.toString().length < 2 // If months is <10 add a 0 at the start
+      ? `0${monthWithOffset}`
+      : monthWithOffset;
+  const date =
+    dateNow.getUTCDate().toString().length < 2 // If date is <10 add a 0 at the start
+      ? `0${dateNow.getUTCDate()}`
+      : dateNow.getUTCDate();
+
+  const materialDateInput = `${year}-${month}-${date}`; // combining to format for defaultValue or value attribute of material <TextField>
+
   useEffect(() => {
     if (
       trigger === true &&
@@ -50,6 +64,7 @@ const NumberAndDate = ({ trigger, setNumberAndDate }: NumberAndDateProps) => {
         sx={{ marginLeft: "2rem" }}
         type="date"
         inputRef={proformaDate}
+        defaultValue={materialDateInput}
       />
     </Container>
   );
