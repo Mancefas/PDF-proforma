@@ -11,7 +11,6 @@ type PdfDocumentProps = {
     address: string;
     companyCode: number;
     bankAccNr: string;
-    bankSwiftCode: string;
     bankName: string;
   };
   buyer: {
@@ -42,7 +41,6 @@ type PdfDocumentProps = {
           address: string;
           companyCode: number;
           bankAccNr: string;
-          bankSwiftCode: string;
           bankName: string;
         }
       | undefined
@@ -109,7 +107,6 @@ const PdfDocument = ({
       `${seller.address}`,
       `Įm.kodas ${seller.companyCode}`,
       `Banko sąsk ${seller.bankAccNr}`,
-      `Banko SWIFT ${seller.bankSwiftCode}`,
       `Bankas ${seller.bankName}`,
     ];
     doc.text(sellerData, 3, 6);

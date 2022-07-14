@@ -11,8 +11,7 @@ const dataFields = [
   },
   { id: "3", label: "Įmonės kodas", name: "sellerCompanyCode", type: "number" },
   { id: "4", label: "Banko sąskaita", name: "sellerBankAcc", type: "text" },
-  { id: "5", label: "Banko kodas", name: "sellerBankSwiftCode", type: "text" },
-  { id: "6", label: "Bankas", name: "sellerBankName", type: "text" },
+  { id: "5", label: "Bankas", name: "sellerBankName", type: "text" },
 ];
 
 type SellerProps = {
@@ -21,7 +20,6 @@ type SellerProps = {
     address: string;
     companyCode: number;
     bankAccNr: string;
-    bankSwiftCode: string;
     bankName: string;
   }) => void;
 
@@ -33,7 +31,6 @@ const Seller = ({ setSeller, trigger }: SellerProps) => {
   const sellerAddress = useRef<HTMLInputElement>(null);
   const sellerCompanyCode = useRef<HTMLInputElement>(null);
   const sellerBankAccNr = useRef<HTMLInputElement>(null);
-  const sellerBankSwiftCode = useRef<HTMLInputElement>(null);
   const sellerBankName = useRef<HTMLInputElement>(null);
 
   const submitHandler = () => {
@@ -42,7 +39,6 @@ const Seller = ({ setSeller, trigger }: SellerProps) => {
       sellerAddress.current?.value &&
       sellerCompanyCode.current?.value &&
       sellerBankAccNr.current?.value &&
-      sellerBankSwiftCode.current?.value &&
       sellerBankName.current?.value
     ) {
       setSeller({
@@ -50,7 +46,6 @@ const Seller = ({ setSeller, trigger }: SellerProps) => {
         address: sellerAddress.current?.value,
         companyCode: +sellerCompanyCode.current?.value,
         bankAccNr: sellerBankAccNr.current?.value,
-        bankSwiftCode: sellerBankSwiftCode.current?.value,
         bankName: sellerBankName.current?.value,
       });
     }
@@ -87,8 +82,6 @@ const Seller = ({ setSeller, trigger }: SellerProps) => {
                 ? sellerCompanyCode
                 : element.name === "sellerBankAcc"
                 ? sellerBankAccNr
-                : element.name === "sellerBankSwiftCode"
-                ? sellerBankSwiftCode
                 : element.name === "sellerBankName"
                 ? sellerBankName
                 : null

@@ -12,7 +12,6 @@ type sellerType = {
   address: string;
   companyCode: number;
   bankAccNr: string;
-  bankSwiftCode: string;
   bankName: string;
 };
 type buyerType = {
