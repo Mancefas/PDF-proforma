@@ -52,7 +52,7 @@ const ProformaInvoice = () => {
   return (
     <>
       <Typography variant="h3" align="center">
-        Išankstinė sąskaita-faktūra
+        Sąskaita proforma
       </Typography>
       <NumberAndDate
         setNumberAndDate={setNumberAndDate}
@@ -82,6 +82,9 @@ const ProformaInvoice = () => {
         goods={goods!}
         numberAndDate={numberAndDate!}
         setSeller={setSeller}
+        setBuyer={setBuyer}
+        setGoods={setGoods}
+        setNumberAndDate={setNumberAndDate}
       />
     </>
   );

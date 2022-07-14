@@ -25,6 +25,16 @@ type PdfDocumentProps = {
     quantity: number;
     price: number;
   };
+  setBuyer: React.Dispatch<
+    React.SetStateAction<
+      | {
+          company: string;
+          address: string;
+          code: number;
+        }
+      | undefined
+    >
+  >;
   setSeller: React.Dispatch<
     React.SetStateAction<
       | {
@@ -38,6 +48,26 @@ type PdfDocumentProps = {
       | undefined
     >
   >;
+  setGoods: React.Dispatch<
+    React.SetStateAction<
+      | {
+          goodsName: string;
+          unit: string;
+          quantity: number;
+          price: number;
+        }
+      | undefined
+    >
+  >;
+  setNumberAndDate: React.Dispatch<
+    React.SetStateAction<
+      | {
+          proformaNumber: string;
+          proformaDate: string;
+        }
+      | undefined
+    >
+  >;
 };
 
 const PdfDocument = ({
@@ -46,6 +76,9 @@ const PdfDocument = ({
   buyer,
   goods,
   setSeller,
+  setBuyer,
+  setGoods,
+  setNumberAndDate,
 }: PdfDocumentProps) => {
   const createPDFDif = () => {
     const doc = new jsPDF({ orientation: "p", unit: "cm", format: "a4" });
@@ -96,6 +129,7 @@ const PdfDocument = ({
 
     //Goods component in pdf
     doc.setFontSize(12);
+    doc.setLineHeightFactor(1.8);
 
     const goodsName = ["Prekės pavadinimas", `${goods.goodsName}`];
     doc.text(goodsName, 3, 12);
@@ -116,7 +150,30 @@ const PdfDocument = ({
     // doc.text("Viso suma žodžiais :", 150, 475);
     // doc.text(" pvz Du šimtai eurų", 300, 475);
 
+    // Proforma issued by, received by
+    const sellerWhoIssued = [
+      "Sąskaitą išrašė",
+      "......................................",
+      "(vardas, pavardė)",
+    ];
+    doc.setLineHeightFactor(2.5);
+    doc.text(sellerWhoIssued, 3, 20);
+
+    const buyerWhoReceived = [
+      "Sąskaitą priėmė",
+      "......................................",
+      "(vardas, pavardė)",
+    ];
+    doc.text(buyerWhoReceived, 14, 20);
+
     doc.save("proforma.pdf");
+
+    // To get " Gaminti proforma" button to show again
+    // Clean inputs for changes to show in PDF doc
+    setNumberAndDate(undefined);
+    setSeller(undefined);
+    setBuyer(undefined);
+    setGoods(undefined);
   };
 
   return (
@@ -129,7 +186,7 @@ const PdfDocument = ({
         marginTop: "1rem",
       }}
     >
-      {seller && buyer && goods && (
+      {seller && buyer && goods && numberAndDate && (
         <Button variant="contained" onClick={createPDFDif} type="button">
           Atsisiųsti proformą
         </Button>
