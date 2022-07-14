@@ -141,16 +141,19 @@ const PdfDocument = ({
     doc.text(quantity, 12, 12);
 
     const priceOneUnit = ["Kaina", `${goods.price}`];
-    doc.text(priceOneUnit, 16, 12);
+    doc.text(priceOneUnit, 15, 12);
 
-    const totalPrice = ["Suma EUR", `${goods.quantity * goods.price}`];
-    doc.text(totalPrice, 500, 12);
+    doc.setFont("times", "bold");
+    doc.text("Viso :", 14, 14);
+    const totalPrice = `${goods.quantity * goods.price} eur`;
+    doc.text(totalPrice, 15.5, 14);
 
     //Numbers in words in pdf
     // doc.text("Viso suma žodžiais :", 150, 475);
     // doc.text(" pvz Du šimtai eurų", 300, 475);
 
     // Proforma issued by, received by
+    doc.setFont("Roboto", "normal");
     const sellerWhoIssued = [
       "Sąskaitą išrašė",
       "......................................",
