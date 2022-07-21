@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Button, Box, Typography } from "@mui/material";
+import { Container, Button, Box, Typography, Grid } from "@mui/material";
 import Buyer from "./Buyer";
 import GoodsSold from "./GoodsSold";
 import Seller from "./Seller";
@@ -53,15 +53,30 @@ const ProformaInvoice = () => {
       <Typography variant="h3" align="center">
         Sąskaita proforma
       </Typography>
+
       <NumberAndDate
         setNumberAndDate={setNumberAndDate}
         trigger={getDataFromComponents}
       />
-      <Container sx={{ display: "flex", flexDirection: "row" }}>
-        <Seller setSeller={setSeller} trigger={getDataFromComponents} />
-        <Buyer setBuyer={setBuyer} trigger={getDataFromComponents} />
-      </Container>
+
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-evenly"
+        alignItems="flex-start"
+        columns={{ sm: 12 }}
+        rowSpacing={1}
+      >
+        <Grid item>
+          <Seller setSeller={setSeller} trigger={getDataFromComponents} />
+        </Grid>
+        <Grid item>
+          <Buyer setBuyer={setBuyer} trigger={getDataFromComponents} />
+        </Grid>
+      </Grid>
+
       <GoodsSold setGoods={setGoods} trigger={getDataFromComponents} />
+
       <Box
         sx={{
           display: "flex",

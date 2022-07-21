@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { Container, TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 
 type NumberAndDateProps = {
   trigger: boolean;
@@ -42,32 +42,38 @@ const NumberAndDate = ({ trigger, setNumberAndDate }: NumberAndDateProps) => {
   }, [trigger]);
 
   return (
-    <Container
+    <Grid
+      container
+      columns={{ sm: 12 }}
+      rowSpacing={1}
+      justifyContent="center"
+      alignItems="center"
       sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         marginY: "2rem",
       }}
     >
-      <TextField
-        variant="outlined"
-        size="small"
-        label="Proformos nr."
-        sx={{ marginLeft: "2rem" }}
-        type="text"
-        inputRef={proformaNumber}
-        defaultValue="0001"
-      />
-      <TextField
-        variant="outlined"
-        size="small"
-        sx={{ marginLeft: "2rem" }}
-        type="date"
-        inputRef={proformaDate}
-        defaultValue={materialDateInput}
-      />
-    </Container>
+      <Grid item>
+        <TextField
+          variant="outlined"
+          size="small"
+          label="Proformos nr."
+          sx={{ marginLeft: "2rem" }}
+          type="text"
+          inputRef={proformaNumber}
+          defaultValue="0001"
+        />
+      </Grid>
+      <Grid item>
+        <TextField
+          variant="outlined"
+          size="small"
+          sx={{ marginLeft: "2rem" }}
+          type="date"
+          inputRef={proformaDate}
+          defaultValue={materialDateInput}
+        />
+      </Grid>
+    </Grid>
   );
 };
 

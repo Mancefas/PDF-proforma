@@ -1,4 +1,4 @@
-import { Typography, Box, TextField, Container } from "@mui/material";
+import { Typography, Box, TextField, Grid } from "@mui/material";
 import { useRef, useEffect } from "react";
 
 const dataFields = [
@@ -54,47 +54,40 @@ const GoodsSold = ({ setGoods = () => {}, trigger }: GoodsSoldProps) => {
   }, [trigger]);
 
   return (
-    <Container
-      sx={{
+    <Grid
+      container
+      columns={{ sm: 6 }}
+      style={{
         display: "flex",
         marginTop: "2rem",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Container
-        style={{
-          display: "flex",
-          marginTop: "2rem",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {dataFields.map((element) => (
-          <Box key={element.id}>
-            <Typography variant="h6">{element.text}</Typography>
-            <TextField
-              sx={{ marginLeft: "0.5rem" }}
-              variant="outlined"
-              name={element.name}
-              label={element.text}
-              inputRef={
-                element.name === "goodsName"
-                  ? soldGoodsName
-                  : element.name === "unit"
-                  ? soldGoodsUnit
-                  : element.name === "quantity"
-                  ? soldGoodsQuantity
-                  : element.name === "price"
-                  ? soldGoodsPrice
-                  : null
-              }
-              type={element.type}
-            ></TextField>
-          </Box>
-        ))}
-      </Container>
-    </Container>
+      {dataFields.map((element) => (
+        <Grid item key={element.id}>
+          <Typography variant="h6">{element.text}</Typography>
+          <TextField
+            sx={{ marginLeft: "0.5rem" }}
+            variant="outlined"
+            name={element.name}
+            label={element.text}
+            inputRef={
+              element.name === "goodsName"
+                ? soldGoodsName
+                : element.name === "unit"
+                ? soldGoodsUnit
+                : element.name === "quantity"
+                ? soldGoodsQuantity
+                : element.name === "price"
+                ? soldGoodsPrice
+                : null
+            }
+            type={element.type}
+          ></TextField>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 
