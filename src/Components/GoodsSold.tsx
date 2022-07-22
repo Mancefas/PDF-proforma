@@ -1,4 +1,4 @@
-import { Typography, Box, TextField, Grid } from "@mui/material";
+import { Typography, TextField, Grid } from "@mui/material";
 import { useRef, useEffect } from "react";
 
 const dataFields = [

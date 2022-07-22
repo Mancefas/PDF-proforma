@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Button, Box, Typography, Grid } from "@mui/material";
+import { Button, Box, Typography, Grid } from "@mui/material";
 import Buyer from "./Buyer";
 import GoodsSold from "./GoodsSold";
 import Seller from "./Seller";

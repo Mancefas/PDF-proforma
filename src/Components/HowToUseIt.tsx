@@ -7,12 +7,10 @@ export default function HowToUseIt() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
 
   useEffect(() => {
     setOpen(!open);
+    // eslint-disable-next-line
   }, []);
 
   return (
