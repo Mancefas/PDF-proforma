@@ -1,18 +1,14 @@
-import { useRef, useEffect } from "react";
 import { Grid, TextField } from "@mui/material";
 
 type NumberAndDateProps = {
-  trigger: boolean;
-  setNumberAndDate: (id: {
-    proformaNumber: string;
-    proformaDate: string;
-  }) => void;
+  numberAndDateInputs: { proformaNumber: string; proformaDate: string };
+  setNumberAndDateInputs: React.Dispatch<React.SetStateAction<any>>;
 };
 
-const NumberAndDate = ({ trigger, setNumberAndDate }: NumberAndDateProps) => {
-  const proformaNumber = useRef<HTMLInputElement>(null);
-  const proformaDate = useRef<HTMLInputElement>(null);
-
+const NumberAndDate2 = ({
+  numberAndDateInputs,
+  setNumberAndDateInputs,
+}: NumberAndDateProps) => {
   const dateNow = new Date(); // Creating a new date object with the current date and time
   const year = dateNow.getFullYear(); // Getting current year from the created Date object
   const monthWithOffset = dateNow.getUTCMonth() + 1; // Months counted from 0 in JS
@@ -26,20 +22,6 @@ const NumberAndDate = ({ trigger, setNumberAndDate }: NumberAndDateProps) => {
       : dateNow.getUTCDate();
 
   const materialDateInput = `${year}-${month}-${date}`; // combining to format for defaultValue or value attribute of material <TextField>
-
-  useEffect(() => {
-    if (
-      trigger === true &&
-      proformaNumber.current?.value &&
-      proformaDate.current?.value
-    ) {
-      setNumberAndDate({
-        proformaNumber: proformaNumber.current?.value,
-        proformaDate: proformaDate.current?.value,
-      });
-    }
-    // eslint-disable-next-line
-  }, [trigger]);
 
   return (
     <Grid
@@ -59,8 +41,14 @@ const NumberAndDate = ({ trigger, setNumberAndDate }: NumberAndDateProps) => {
           label="Proformos nr."
           sx={{ marginLeft: "2rem" }}
           type="text"
-          inputRef={proformaNumber}
           defaultValue="0001"
+          value={numberAndDateInputs.proformaNumber}
+          onChange={(e) =>
+            setNumberAndDateInputs({
+              ...numberAndDateInputs,
+              proformaNumber: e.target.value,
+            })
+          }
         />
       </Grid>
       <Grid item>
@@ -69,12 +57,21 @@ const NumberAndDate = ({ trigger, setNumberAndDate }: NumberAndDateProps) => {
           size="small"
           sx={{ marginLeft: "2rem" }}
           type="date"
-          inputRef={proformaDate}
-          defaultValue={materialDateInput}
+          value={
+            numberAndDateInputs.proformaDate === ""
+              ? materialDateInput
+              : numberAndDateInputs.proformaDate
+          }
+          onChange={(e) => {
+            setNumberAndDateInputs({
+              ...numberAndDateInputs,
+              proformaDate: e.target.value,
+            });
+          }}
         />
       </Grid>
     </Grid>
   );
 };
 
-export default NumberAndDate;
+export default NumberAndDate2;

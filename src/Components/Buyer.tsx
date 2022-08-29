@@ -1,44 +1,16 @@
-import { useRef, useEffect } from "react";
-import { Typography, Box, TextField, Container } from "@mui/material";
+import React from "react";
+import { Container, Box, TextField, Typography } from "@mui/material";
 
-// if needed to map fields later
-// const dataFields = [
-//   { id: 1, label: "UAB Įmonė", ref: "buyerCompanyName", type: "text" },
-//   { id: 2, label: "Įmonės adresas", ref: "buyerCompanyAddress", type: "text" },
-//   { id: 3, label: "Įmonės kodas", ref: "buyerCode", type: "number" },
-// ];
-
-type BuyerProps = {
-  setBuyer: (id: { company: string; address: string; code: number }) => void;
-  trigger: boolean;
+type buyerProps = {
+  buyerInputs: {
+    buyerCompanyName: string;
+    buyerAddress: string;
+    buyerCompanyCode: string;
+  };
+  setBuyerInputs: React.Dispatch<React.SetStateAction<any>>;
 };
 
-const Buyer = ({ setBuyer, trigger }: BuyerProps) => {
-  const buyerCompanyName = useRef<HTMLInputElement>(null);
-  const buyerCompanyAddress = useRef<HTMLInputElement>(null);
-  const buyerCode = useRef<HTMLInputElement>(null);
-
-  const formSubmitHandler = () => {
-    if (
-      buyerCompanyName.current?.value &&
-      buyerCompanyAddress.current?.value &&
-      buyerCode.current?.value
-    ) {
-      setBuyer({
-        company: buyerCompanyName.current?.value,
-        address: buyerCompanyAddress.current?.value,
-        code: +buyerCode.current?.value,
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (trigger === true) {
-      formSubmitHandler();
-    }
-    // eslint-disable-next-line
-  }, [trigger]);
-
+const Buyer2 = ({ buyerInputs, setBuyerInputs }: buyerProps) => {
   return (
     <Container maxWidth="xs">
       <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
@@ -50,20 +22,37 @@ const Buyer = ({ setBuyer, trigger }: BuyerProps) => {
             sx={{ marginBottom: "0.5rem" }}
             variant="outlined"
             label="UAB Įmonė"
-            inputRef={buyerCompanyName}
+            value={buyerInputs.buyerCompanyName}
+            onChange={(e) => {
+              setBuyerInputs({
+                ...buyerInputs,
+                buyerCompanyName: e.target.value,
+              });
+            }}
           ></TextField>
           <TextField
             sx={{ marginBottom: "0.5rem" }}
             variant="outlined"
             label="Įmonės adresas"
-            inputRef={buyerCompanyAddress}
+            value={buyerInputs.buyerAddress}
+            onChange={(e) => {
+              setBuyerInputs({
+                ...buyerInputs,
+                buyerAddress: e.target.value,
+              });
+            }}
           ></TextField>
           <TextField
             sx={{ marginBottom: "0.5rem" }}
             variant="outlined"
             label="Įmonės kodas"
-            type="number"
-            inputRef={buyerCode}
+            value={buyerInputs.buyerCompanyCode}
+            onChange={(e) => {
+              setBuyerInputs({
+                ...buyerInputs,
+                buyerCompanyCode: e.target.value,
+              });
+            }}
           ></TextField>
         </Container>
       </Box>
@@ -71,4 +60,4 @@ const Buyer = ({ setBuyer, trigger }: BuyerProps) => {
   );
 };
 
-export default Buyer;
+export default Buyer2;

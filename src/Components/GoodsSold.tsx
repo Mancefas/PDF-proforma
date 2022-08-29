@@ -1,94 +1,67 @@
-import { Typography, TextField, Grid } from "@mui/material";
-import { useRef, useEffect } from "react";
+import { Typography, TextField, Box, Container } from "@mui/material";
 
-const dataFields = [
-  {
-    id: "1",
-    text: "Prekės pavadinimas",
-    type: "text",
-    name: "goodsName",
-  },
-  { id: "2", text: "Mato vnt.", type: "text", name: "unit" },
-  { id: "3", text: "Kiekis", type: "number", name: "quantity" },
-  { id: "4", text: "Kaina", type: "number", name: "price" },
-];
-
-type GoodsSoldProps = {
-  setGoods: (id: {
+type goodsSoldType = {
+  goodsSoldInputs: {
     goodsName: string;
     unit: string;
     quantity: number;
     price: number;
-  }) => void;
-  trigger: boolean;
+  };
+  setGoodsSoldInputs: React.Dispatch<React.SetStateAction<any>>;
 };
 
-const GoodsSold = ({ setGoods = () => {}, trigger }: GoodsSoldProps) => {
-  const soldGoodsName = useRef<HTMLInputElement>(null);
-  const soldGoodsUnit = useRef<HTMLInputElement>(null);
-  const soldGoodsQuantity = useRef<HTMLInputElement>(null);
-  const soldGoodsPrice = useRef<HTMLInputElement>(null);
-
-  const submitHandler = () => {
-    // get value first and then setGoods
-    if (
-      soldGoodsName.current?.value &&
-      soldGoodsUnit.current?.value &&
-      soldGoodsQuantity.current?.value &&
-      soldGoodsPrice.current?.value
-    ) {
-      setGoods({
-        goodsName: soldGoodsName.current?.value!,
-        unit: soldGoodsUnit.current?.value!,
-        quantity: +soldGoodsQuantity.current?.value!,
-        price: +soldGoodsPrice.current?.value!,
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (trigger === true) {
-      submitHandler();
-    }
-    // eslint-disable-next-line
-  }, [trigger]);
-
+const GoodsSold2 = ({ goodsSoldInputs, setGoodsSoldInputs }: goodsSoldType) => {
   return (
-    <Grid
-      container
-      columns={{ sm: 6 }}
-      style={{
-        display: "flex",
-        marginTop: "2rem",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {dataFields.map((element) => (
-        <Grid item key={element.id}>
-          <Typography variant="h6">{element.text}</Typography>
-          <TextField
-            sx={{ marginLeft: "0.5rem" }}
-            variant="outlined"
-            name={element.name}
-            label={element.text}
-            inputRef={
-              element.name === "goodsName"
-                ? soldGoodsName
-                : element.name === "unit"
-                ? soldGoodsUnit
-                : element.name === "quantity"
-                ? soldGoodsQuantity
-                : element.name === "price"
-                ? soldGoodsPrice
-                : null
-            }
-            type={element.type}
-          ></TextField>
-        </Grid>
-      ))}
-    </Grid>
+    <Container maxWidth="xs">
+      <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
+        Pirkėjas
+      </Typography>
+      <Box sx={{ display: "flex" }}>
+        <TextField
+          sx={{ marginBottom: "0.5rem" }}
+          variant="outlined"
+          label="Prekės pavadinimas"
+          value={goodsSoldInputs.goodsName}
+          onChange={(e) =>
+            setGoodsSoldInputs({
+              ...goodsSoldInputs,
+              goodsName: e.target.value,
+            })
+          }
+        ></TextField>
+        <TextField
+          sx={{ marginBottom: "0.5rem" }}
+          variant="outlined"
+          label="Mato vnt."
+          value={goodsSoldInputs.unit}
+          onChange={(e) =>
+            setGoodsSoldInputs({ ...goodsSoldInputs, unit: e.target.value })
+          }
+        ></TextField>
+        <TextField
+          sx={{ marginBottom: "0.5rem" }}
+          variant="outlined"
+          label="Kiekis"
+          value={goodsSoldInputs.quantity}
+          onChange={(e) =>
+            setGoodsSoldInputs({
+              ...goodsSoldInputs,
+              quantity: e.target.value,
+            })
+          }
+        ></TextField>
+        <TextField
+          sx={{ marginBottom: "0.5rem" }}
+          variant="outlined"
+          label="Kaina"
+          value={goodsSoldInputs.price}
+          onChange={(e) =>
+            setGoodsSoldInputs({ ...goodsSoldInputs, price: e.target.value })
+          }
+        ></TextField>
+      </Box>
+    </Container>
   );
 };
 
-export default GoodsSold;
+export default GoodsSold2;

@@ -1,52 +1,34 @@
 import { useState } from "react";
-import { Button, Box, Typography, Grid } from "@mui/material";
+import { Container, Box, Button, Typography } from "@mui/material";
 import Buyer from "./Buyer";
-import GoodsSold from "./GoodsSold";
 import Seller from "./Seller";
 import NumberAndDate from "./NumberAndDate";
+import GoodsSold from "./GoodsSold";
 
-import PdfDocument from "./PdfDocument";
+const ProformaInvoice2 = () => {
+  const [formPage, setFormPage] = useState<number>(0);
 
-type sellerType = {
-  company: string;
-  address: string;
-  companyCode: number;
-  bankAccNr: string;
-  bankName: string;
-};
-type buyerType = {
-  company: string;
-  address: string;
-  code: number;
-};
-
-type numberAndDateType = {
-  proformaNumber: string;
-  proformaDate: string;
-};
-
-type goodsType = {
-  goodsName: string;
-  unit: string;
-  quantity: number;
-  price: number;
-};
-
-const ProformaInvoice = () => {
-  const [seller, setSeller] = useState<sellerType>();
-  const [buyer, setBuyer] = useState<buyerType>();
-  const [goods, setGoods] = useState<goodsType>();
-  const [numberAndDate, setNumberAndDate] = useState<numberAndDateType>();
-
-  const [getDataFromComponents, setGetDataFromComponents] =
-    useState<boolean>(false);
-
-  const submitHandler = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    setGetDataFromComponents((prevState) => !prevState);
-  };
+  const [numberAndDateInputs, setNumberAndDateInputs] = useState({
+    proformaNumber: "",
+    proformaDate: "",
+  });
+  const [sellerInputs, setSellerInputs] = useState({
+    sellerCompanyName: "",
+    sellerAddress: "",
+    sellerCompanyCode: "",
+    sellerBankAcc: "",
+  });
+  const [buyerInputs, setBuyerInputs] = useState({
+    buyerCompanyName: "",
+    buyerAddress: "",
+    buyerCompanyCode: "",
+  });
+  const [goodsSoldInputs, setGoodsSoldInputs] = useState({
+    goodsName: "",
+    unit: "",
+    quantity: 0,
+    price: 0,
+  });
 
   return (
     <>
@@ -54,54 +36,58 @@ const ProformaInvoice = () => {
         Sąskaita proforma
       </Typography>
 
-      <NumberAndDate
-        setNumberAndDate={setNumberAndDate}
-        trigger={getDataFromComponents}
-      />
+      <Container sx={{ marginTop: "2rem" }}>
+        {formPage === 0 && (
+          <NumberAndDate
+            numberAndDateInputs={numberAndDateInputs}
+            setNumberAndDateInputs={setNumberAndDateInputs}
+          />
+        )}
 
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-evenly"
-        alignItems="flex-start"
-        columns={{ sm: 12 }}
-        rowSpacing={1}
-      >
-        <Grid item>
-          <Seller setSeller={setSeller} trigger={getDataFromComponents} />
-        </Grid>
-        <Grid item>
-          <Buyer setBuyer={setBuyer} trigger={getDataFromComponents} />
-        </Grid>
-      </Grid>
+        {formPage === 1 && (
+          <Seller
+            sellerInputs={sellerInputs}
+            setSellerInputs={setSellerInputs}
+          />
+        )}
 
-      <GoodsSold setGoods={setGoods} trigger={getDataFromComponents} />
+        {formPage === 2 && (
+          <Buyer buyerInputs={buyerInputs} setBuyerInputs={setBuyerInputs} />
+        )}
+
+        {formPage === 3 && (
+          <GoodsSold
+            goodsSoldInputs={goodsSoldInputs}
+            setGoodsSoldInputs={setGoodsSoldInputs}
+          />
+        )}
+      </Container>
 
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          gap: "1rem",
         }}
       >
-        {seller === undefined && (
-          <Button variant="text" onClick={submitHandler}>
-            Gaminti proformą
-          </Button>
-        )}
+        <Button
+          variant="contained"
+          disabled={formPage === 0}
+          onClick={() => setFormPage(formPage - 1)}
+        >
+          Atgal
+        </Button>
+        <Button
+          variant="contained"
+          disabled={formPage === 3}
+          onClick={() => setFormPage(formPage + 1)}
+        >
+          Toliau
+        </Button>
       </Box>
-      <PdfDocument
-        seller={seller!}
-        buyer={buyer!}
-        goods={goods!}
-        numberAndDate={numberAndDate!}
-        setSeller={setSeller}
-        setBuyer={setBuyer}
-        setGoods={setGoods}
-        setNumberAndDate={setNumberAndDate}
-      />
     </>
   );
 };
 
-export default ProformaInvoice;
+export default ProformaInvoice2;
