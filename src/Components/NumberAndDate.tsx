@@ -57,11 +57,12 @@ const NumberAndDate = ({
           size="small"
           sx={{ marginLeft: "2rem" }}
           type="date"
-          value={
-            numberAndDateInputs.proformaDate === ""
-              ? materialDateInput
-              : numberAndDateInputs.proformaDate
-          }
+          value={numberAndDateInputs.proformaDate}
+          // value={
+          //   numberAndDateInputs.proformaDate === ""
+          //     ? materialDateInput
+          //     : numberAndDateInputs.proformaDate
+          // }
           onChange={(e) => {
             setNumberAndDateInputs({
               ...numberAndDateInputs,

@@ -7,16 +7,15 @@ type PdfDocumentProps = {
     proformaDate: string;
   };
   seller: {
-    company: string;
-    address: string;
-    companyCode: number;
-    bankAccNr: string;
-    bankName: string;
+    sellerCompanyName: string;
+    sellerAddress: string;
+    sellerCompanyCode: string;
+    sellerBankAcc: string;
   };
   buyer: {
-    company: string;
-    address: string;
-    code: number;
+    buyerCompanyName: string;
+    buyerAddress: string;
+    buyerCompanyCode: string;
   };
   goods: {
     goodsName: string;
@@ -24,48 +23,6 @@ type PdfDocumentProps = {
     quantity: number;
     price: number;
   };
-  setBuyer: React.Dispatch<
-    React.SetStateAction<
-      | {
-          company: string;
-          address: string;
-          code: number;
-        }
-      | undefined
-    >
-  >;
-  setSeller: React.Dispatch<
-    React.SetStateAction<
-      | {
-          company: string;
-          address: string;
-          companyCode: number;
-          bankAccNr: string;
-          bankName: string;
-        }
-      | undefined
-    >
-  >;
-  setGoods: React.Dispatch<
-    React.SetStateAction<
-      | {
-          goodsName: string;
-          unit: string;
-          quantity: number;
-          price: number;
-        }
-      | undefined
-    >
-  >;
-  setNumberAndDate: React.Dispatch<
-    React.SetStateAction<
-      | {
-          proformaNumber: string;
-          proformaDate: string;
-        }
-      | undefined
-    >
-  >;
 };
 
 const PdfDocument = ({
@@ -73,10 +30,6 @@ const PdfDocument = ({
   seller,
   buyer,
   goods,
-  setSeller,
-  setBuyer,
-  setGoods,
-  setNumberAndDate,
 }: PdfDocumentProps) => {
   const createPDFDif = () => {
     const doc = new jsPDF({ orientation: "p", unit: "cm", format: "a4" });
@@ -103,11 +56,10 @@ const PdfDocument = ({
     doc.setTextColor("black");
     doc.setFontSize(12);
     const sellerData = [
-      `${seller.company}`,
-      `${seller.address}`,
-      `Įm.kodas ${seller.companyCode}`,
-      `Banko sąsk ${seller.bankAccNr}`,
-      `Bankas ${seller.bankName}`,
+      `${seller.sellerCompanyName}`,
+      `${seller.sellerAddress}`,
+      `Įm.kodas ${seller.sellerCompanyCode}`,
+      `Banko sąsk ${seller.sellerBankAcc}`,
     ];
     doc.text(sellerData, 3, 6);
 
@@ -118,9 +70,9 @@ const PdfDocument = ({
     doc.setTextColor("black");
     doc.setFontSize(12);
     const buyerData = [
-      `${buyer.company}`,
-      `${buyer.address}`,
-      `Įm. kodas ${buyer.code}`,
+      `${buyer.buyerCompanyName}`,
+      `${buyer.buyerAddress}`,
+      `Įm. kodas ${buyer.buyerCompanyCode}`,
     ];
     doc.text(buyerData, 14, 6);
 
@@ -170,10 +122,10 @@ const PdfDocument = ({
 
     // To get " Gaminti proforma" button to show again
     // Clean inputs for changes to show in PDF doc
-    setNumberAndDate(undefined);
-    setSeller(undefined);
-    setBuyer(undefined);
-    setGoods(undefined);
+    // setNumberAndDate(undefined);
+    // setSeller(undefined);
+    // setBuyer(undefined);
+    // setGoods(undefined);
   };
 
   return (

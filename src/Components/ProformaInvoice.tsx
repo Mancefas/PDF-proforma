@@ -4,6 +4,7 @@ import Buyer from "./Buyer";
 import Seller from "./Seller";
 import NumberAndDate from "./NumberAndDate";
 import GoodsSold from "./GoodsSold";
+import PdfDocument from "./PdfDocument";
 
 const ProformaInvoice = () => {
   const [formPage, setFormPage] = useState<number>(0);
@@ -61,6 +62,15 @@ const ProformaInvoice = () => {
             setGoodsSoldInputs={setGoodsSoldInputs}
           />
         )}
+
+        {formPage === 4 && (
+          <PdfDocument
+            numberAndDate={numberAndDateInputs}
+            seller={sellerInputs}
+            buyer={buyerInputs}
+            goods={goodsSoldInputs}
+          />
+        )}
       </Container>
 
       <Box
@@ -80,7 +90,7 @@ const ProformaInvoice = () => {
         </Button>
         <Button
           variant="contained"
-          disabled={formPage === 3}
+          disabled={formPage === 4}
           onClick={() => setFormPage(formPage + 1)}
         >
           Toliau
