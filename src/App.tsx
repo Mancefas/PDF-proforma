@@ -1,7 +1,6 @@
 import "./App.css";
 import ProformaInvoice from "./Components/ProformaInvoice";
 import CookieConsent from "react-cookie-consent";
-import HowToUseIt from "./Components/HowToUseIt";
 
 function App() {
   return (
@@ -28,7 +27,6 @@ function App() {
           </a>{" "}
         </span>
       </CookieConsent>
-      <HowToUseIt />
     </>
   );
 }
