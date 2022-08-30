@@ -10,7 +10,7 @@ type goodsSoldType = {
   setGoodsSoldInputs: React.Dispatch<React.SetStateAction<any>>;
 };
 
-const GoodsSold2 = ({ goodsSoldInputs, setGoodsSoldInputs }: goodsSoldType) => {
+const GoodsSold = ({ goodsSoldInputs, setGoodsSoldInputs }: goodsSoldType) => {
   return (
     <Container maxWidth="xs">
       <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
@@ -64,4 +64,4 @@ const GoodsSold2 = ({ goodsSoldInputs, setGoodsSoldInputs }: goodsSoldType) => {
   );
 };
 
-export default GoodsSold2;
+export default GoodsSold;

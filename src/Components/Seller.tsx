@@ -12,7 +12,7 @@ type sellerType = {
   setSellerInputs: React.Dispatch<React.SetStateAction<any>>;
 };
 
-const Seller2 = ({ sellerInputs, setSellerInputs }: sellerType) => {
+const Seller = ({ sellerInputs, setSellerInputs }: sellerType) => {
   return (
     <Container maxWidth="xs">
       <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
@@ -73,4 +73,4 @@ const Seller2 = ({ sellerInputs, setSellerInputs }: sellerType) => {
   );
 };
 
-export default Seller2;
+export default Seller;

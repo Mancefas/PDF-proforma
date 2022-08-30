@@ -10,7 +10,7 @@ type buyerProps = {
   setBuyerInputs: React.Dispatch<React.SetStateAction<any>>;
 };
 
-const Buyer2 = ({ buyerInputs, setBuyerInputs }: buyerProps) => {
+const Buyer = ({ buyerInputs, setBuyerInputs }: buyerProps) => {
   return (
     <Container maxWidth="xs">
       <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
@@ -60,4 +60,4 @@ const Buyer2 = ({ buyerInputs, setBuyerInputs }: buyerProps) => {
   );
 };
 
-export default Buyer2;
+export default Buyer;

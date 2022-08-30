@@ -5,7 +5,7 @@ type NumberAndDateProps = {
   setNumberAndDateInputs: React.Dispatch<React.SetStateAction<any>>;
 };
 
-const NumberAndDate2 = ({
+const NumberAndDate = ({
   numberAndDateInputs,
   setNumberAndDateInputs,
 }: NumberAndDateProps) => {
@@ -74,4 +74,4 @@ const NumberAndDate2 = ({
   );
 };
 
-export default NumberAndDate2;
+export default NumberAndDate;

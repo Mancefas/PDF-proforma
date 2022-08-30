@@ -5,7 +5,7 @@ import Seller from "./Seller";
 import NumberAndDate from "./NumberAndDate";
 import GoodsSold from "./GoodsSold";
 
-const ProformaInvoice2 = () => {
+const ProformaInvoice = () => {
   const [formPage, setFormPage] = useState<number>(0);
 
   const [numberAndDateInputs, setNumberAndDateInputs] = useState({
@@ -90,4 +90,4 @@ const ProformaInvoice2 = () => {
   );
 };
 
-export default ProformaInvoice2;
+export default ProformaInvoice;
