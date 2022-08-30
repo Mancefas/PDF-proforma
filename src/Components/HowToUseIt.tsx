@@ -32,11 +32,13 @@ export default function HowToUseIt() {
               margin: "1rem",
             }}
           >
-            <Button variant="text">Gaminti proformą</Button>
+            <Button variant="contained" size="small">
+              Toliau
+            </Button>
           </Box>
           <Typography textAlign="center">
-            Jeigu suvesti visi langeliai - paspaudus mygtuką atsiranda kitas
-            mygtukas
+            Suvedus reikalingus laukelius galėsite atsisiųst Sąskaitą-proformą
+            PDF formatu
           </Typography>
           <Box
             sx={{

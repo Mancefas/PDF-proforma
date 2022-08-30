@@ -2,14 +2,10 @@ import React from "react";
 import { Typography, TextField, Container, Box } from "@mui/material";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 
-type sellerType = {
-  sellerInputs: {
-    sellerCompanyName: string;
-    sellerAddress: string;
-    sellerCompanyCode: string;
-    sellerBankAcc: string;
-  };
+import { sellerTypes } from "../types.model";
 
+type sellerType = {
+  sellerInputs: sellerTypes;
   setSellerInputs: React.Dispatch<React.SetStateAction<any>>;
 };
 

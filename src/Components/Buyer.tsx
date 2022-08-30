@@ -2,12 +2,10 @@ import React from "react";
 import { Container, Box, TextField, Typography } from "@mui/material";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 
+import { buyerTypes } from "../types.model";
+
 type buyerProps = {
-  buyerInputs: {
-    buyerCompanyName: string;
-    buyerAddress: string;
-    buyerCompanyCode: string;
-  };
+  buyerInputs: buyerTypes;
   setBuyerInputs: React.Dispatch<React.SetStateAction<any>>;
 };
 

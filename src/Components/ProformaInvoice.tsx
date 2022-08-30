@@ -6,25 +6,33 @@ import NumberAndDate from "./NumberAndDate";
 import GoodsSold from "./GoodsSold";
 import PdfDocument from "./PdfDocument";
 
+import {
+  numberAndDateTypes,
+  buyerTypes,
+  sellerTypes,
+  goodsTypes,
+} from "../types.model";
+
 const ProformaInvoice = () => {
   const [formPage, setFormPage] = useState<number>(0);
 
-  const [numberAndDateInputs, setNumberAndDateInputs] = useState({
-    proformaNumber: "",
-    proformaDate: "",
-  });
-  const [sellerInputs, setSellerInputs] = useState({
+  const [numberAndDateInputs, setNumberAndDateInputs] =
+    useState<numberAndDateTypes>({
+      proformaNumber: "",
+      proformaDate: "",
+    });
+  const [sellerInputs, setSellerInputs] = useState<sellerTypes>({
     sellerCompanyName: "",
     sellerAddress: "",
     sellerCompanyCode: "",
     sellerBankAcc: "",
   });
-  const [buyerInputs, setBuyerInputs] = useState({
+  const [buyerInputs, setBuyerInputs] = useState<buyerTypes>({
     buyerCompanyName: "",
     buyerAddress: "",
     buyerCompanyCode: "",
   });
-  const [goodsSoldInputs, setGoodsSoldInputs] = useState({
+  const [goodsSoldInputs, setGoodsSoldInputs] = useState<goodsTypes>({
     goodsName: "",
     unit: "",
     quantity: 0,

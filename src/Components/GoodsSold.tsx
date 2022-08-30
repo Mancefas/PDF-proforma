@@ -1,13 +1,10 @@
 import { Typography, TextField, Box, Container } from "@mui/material";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 
+import { goodsTypes } from "../types.model";
+
 type goodsSoldType = {
-  goodsSoldInputs: {
-    goodsName: string;
-    unit: string;
-    quantity: number;
-    price: number;
-  };
+  goodsSoldInputs: goodsTypes;
   setGoodsSoldInputs: React.Dispatch<React.SetStateAction<any>>;
 };
 
