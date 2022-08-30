@@ -1,5 +1,6 @@
 import React from "react";
-import { Typography, TextField, Container } from "@mui/material";
+import { Typography, TextField, Container, Box } from "@mui/material";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 
 type sellerType = {
   sellerInputs: {
@@ -15,9 +16,12 @@ type sellerType = {
 const Seller = ({ sellerInputs, setSellerInputs }: sellerType) => {
   return (
     <Container maxWidth="xs">
-      <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
-        Pardavėjas
-      </Typography>
+      <Box sx={{ display: "flex", gap: "1rem" }}>
+        <StorefrontIcon fontSize="large" color="info" />
+        <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
+          Pardavėjas
+        </Typography>
+      </Box>
 
       <Container style={{ display: "flex", flexDirection: "column" }}>
         <TextField

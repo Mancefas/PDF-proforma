@@ -1,5 +1,7 @@
 import { jsPDF } from "jspdf";
 import { Box, Button } from "@mui/material";
+import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
+import SimCardDownloadIcon from "@mui/icons-material/SimCardDownload";
 
 type PdfDocumentProps = {
   numberAndDate: {
@@ -138,11 +140,16 @@ const PdfDocument = ({
         marginTop: "1rem",
       }}
     >
-      {seller && buyer && goods && numberAndDate && (
-        <Button variant="contained" onClick={createPDFDif} type="button">
-          Atsisiųsti proformą
-        </Button>
-      )}
+      <Button
+        color="success"
+        variant="contained"
+        size="large"
+        onClick={createPDFDif}
+        type="button"
+        sx={{ paddingY: "1rem" }}
+      >
+        <DocumentScannerIcon /> <SimCardDownloadIcon /> Atsisiųsti proformą
+      </Button>
     </Box>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Box, TextField, Typography } from "@mui/material";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 
 type buyerProps = {
   buyerInputs: {
@@ -13,9 +14,12 @@ type buyerProps = {
 const Buyer = ({ buyerInputs, setBuyerInputs }: buyerProps) => {
   return (
     <Container maxWidth="xs">
-      <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
-        Pirkėjas
-      </Typography>
+      <Box sx={{ display: "flex", gap: "1rem" }}>
+        <StorefrontIcon fontSize="large" color="info" />
+        <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
+          Pirkėjas
+        </Typography>
+      </Box>
       <Box>
         <Container style={{ display: "flex", flexDirection: "column" }}>
           <TextField

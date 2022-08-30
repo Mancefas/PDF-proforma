@@ -1,4 +1,6 @@
-import { Grid, TextField } from "@mui/material";
+import { Grid, TextField, Container, Box, Typography } from "@mui/material";
+import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 type NumberAndDateProps = {
   numberAndDateInputs: { proformaNumber: string; proformaDate: string };
@@ -24,22 +26,20 @@ const NumberAndDate = ({
   const materialDateInput = `${year}-${month}-${date}`; // combining to format for defaultValue or value attribute of material <TextField>
 
   return (
-    <Grid
-      container
-      columns={{ sm: 12 }}
-      rowSpacing={1}
-      justifyContent="center"
-      alignItems="center"
-      sx={{
-        marginY: "2rem",
-      }}
-    >
-      <Grid item>
+    <Container maxWidth="xs">
+      <Box sx={{ display: "flex", gap: "1rem", justifyContent: "start" }}>
+        <FormatListNumberedRtlIcon fontSize="large" color="info" />
+        <AccessTimeIcon fontSize="large" color="info" />
+        <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
+          Numeris ir data
+        </Typography>
+      </Box>
+
+      <Box sx={{ display: "flex", justifyContent: "start" }}>
         <TextField
           variant="outlined"
           size="small"
           label="Proformos nr."
-          sx={{ marginLeft: "2rem" }}
           type="text"
           defaultValue="0001"
           value={numberAndDateInputs.proformaNumber}
@@ -50,8 +50,7 @@ const NumberAndDate = ({
             })
           }
         />
-      </Grid>
-      <Grid item>
+
         <TextField
           variant="outlined"
           size="small"
@@ -70,8 +69,8 @@ const NumberAndDate = ({
             });
           }}
         />
-      </Grid>
-    </Grid>
+      </Box>
+    </Container>
   );
 };
 

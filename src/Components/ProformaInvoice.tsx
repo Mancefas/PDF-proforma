@@ -37,7 +37,15 @@ const ProformaInvoice = () => {
         Sąskaita proforma
       </Typography>
 
-      <Container sx={{ marginTop: "2rem" }}>
+      <Container
+        sx={{
+          marginTop: "2rem",
+          minHeight: "60vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         {formPage === 0 && (
           <NumberAndDate
             numberAndDateInputs={numberAndDateInputs}

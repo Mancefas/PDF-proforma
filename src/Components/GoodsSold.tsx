@@ -1,4 +1,5 @@
 import { Typography, TextField, Box, Container } from "@mui/material";
+import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 
 type goodsSoldType = {
   goodsSoldInputs: {
@@ -13,9 +14,12 @@ type goodsSoldType = {
 const GoodsSold = ({ goodsSoldInputs, setGoodsSoldInputs }: goodsSoldType) => {
   return (
     <Container maxWidth="xs">
-      <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
-        Pirkėjas
-      </Typography>
+      <Box sx={{ display: "flex", gap: "1rem" }}>
+        <EventAvailableIcon fontSize="large" color="info" />
+        <Typography variant="h5" sx={{ marginBottom: "1rem" }}>
+          Prekė / Paslauga
+        </Typography>
+      </Box>
       <Box sx={{ display: "flex" }}>
         <TextField
           sx={{ marginBottom: "0.5rem" }}
